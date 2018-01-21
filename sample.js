@@ -168,7 +168,7 @@ function draw_tent(x,y)
 }
 
 function draw() {
-    background(150);
+    background(125);
     noStroke();
     textFont("sans",40);
     text("Change the ratio between pots", 100, 55);
