@@ -179,10 +179,11 @@ function draw() {
     tent_x = 40
     tent_y = 135
     draw_tent(tent_x, tent_y)
-    image(peep,60 + 0.2*column.height, 150+0.75*column.height, peep.width/2, peep.height/2)
+    //image(peep,60 + 0.2*column.height, 150+0.75*column.height, peep.width/2, peep.height/2)
+    image(peep, tent_x+0.2*tent.width, 0.65*tent.height, peep.width/2, peep.height/2)
 
     update_simulation();
-    draw_simulation(tent_x+0.2*tent.width, 0.65*tent.height)//tent_y+tent.height);
+    draw_simulation(tent_x+0.15*tent.width, tent.height)//tent_y+tent.height);
 
     //r = r/200.0
     //x0 = x0/1000.0
