@@ -1,5 +1,5 @@
 var button;
-var pSlider;
+var pSlider1;
 
 // Simulation variables
 var pile1, pile2;
@@ -16,8 +16,13 @@ function setup()
     //fill(250);
 
     // load images
-    tent   = loadImage("images/tent.svg");
-    peep   = loadImage("images/peep.png");
+    tent   = loadImage("../images/tent.svg");
+    peep   = loadImage("../images/peep.png");
+
+    // create slider
+    pSlider1 = createSlider(0, 100, 50);
+    pSlider1.position(600, 100);
+	pSlider1.style('width', '165px');
 
     // create button
     var col = color(242,230,213,50);
@@ -25,12 +30,8 @@ function setup()
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(500,70);
+    button.position(510,pSlider1.y+45);
 
-    // create slider
-    pSlider = createSlider(0, 100, 50);
-    pSlider.position(165, 80);
-	pSlider.style('width', '165px');
 
     // setup simulation variables
     pA = 0;
@@ -42,7 +43,7 @@ function setup()
 
 function run_simulation()
 {
-    p = pSlider.value();
+    p = pSlider1.value();
     reset_simulation();
 }
 
@@ -128,10 +129,10 @@ function draw()
 	fill(50);
     textFont("sans",30);
     text("Change the preference between pots", 50, 45);
-	text("pot A", 70, 90);
-	text("pot B", 350, 90);
+	text("pot A", pSlider1.x-95 , pSlider1.y+10);
+	text("pot B", pSlider1.x+185, pSlider1.y+10);
     tent_x = 40
-    tent_y = 100
+    tent_y = 70
 
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)

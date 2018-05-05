@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8">
 
+	    <script language="javascript" type="text/javascript" src="files/p5.js"></script>
         <script language="javascript" src="files/p5.dom.js"></script>
         <title>
            Jerash Project
@@ -14,17 +15,46 @@
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     </head>
 
+
+	<script>
+	function includeHTML() {
+	  var z, i, elmnt, file, xhttp;
+	  /*loop through a collection of all HTML elements:*/
+	  z = document.getElementsByTagName("*");
+	  for (i = 0; i < z.length; i++) {
+		elmnt = z[i];
+		/*search for elements with a certain atrribute:*/
+		file = elmnt.getAttribute("w3-include-html");
+		if (file) {
+		  /*make an HTTP request using the attribute value as the file name:*/
+		  xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4) {
+		      if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+		      if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+		      /*remove the attribute, and call this function once more:*/
+		      elmnt.removeAttribute("w3-include-html");
+		      includeHTML();
+		    }
+		  }      
+		  xhttp.open("GET", file, true);
+		  xhttp.send();
+		  /*exit the function:*/
+		  return;
+		}
+	  }
+	};
+	</script>
+
+
+
     <body class="bg-white-10 pt5-ns pt4 ph5-ns ph4 black-80 lato">
         <header>
             <h1 class="f2 f1-ns bb mt0">Jerash project</h1>
         </header>
     <div class="f4-ns">
 
-	<p class="lh-copy">
-	Archaeology is <b><i>hard.</i></b> The world is complex, interconnected and messy, and it is a daunting task to reconstruct it from fragments we have left behind. 
-
-	<p class="lh-copy">
-	Consider, for example, the goods we consume. The things we consume (and the traces we leave behind) are a product of the economy, politics, but also of our day-to-day choices. But how then, can archaeologists study the way individual choices and preferences influence archaeological remains? Here we will introduce an approach that can help us test hypotheses related to the effect of choice and preference with a real-world case study. 
+	<div w3-include-html="files/text_header.html"></div> 
 
 	<p class="lh-copy">
 	This is Jerash.
@@ -35,25 +65,11 @@
 	</div>
 	<!-- </div> -->
 
-	<p class="lh-copy">
-	Something curious about Jerash is that almost all of the ceramic remains found here were locally produced (more than 99% of it!). This phenomenon is quite unique, especially since other urban centres in the regions show more diversity in the ceramic assemblages found there.
 
-	<p class="lh-copy">
-	There are a couple hypotheses to explain what's happening. You might think that thinking critically you might be able to figure out which one. Here we'll introduce you to a tool that can help you reason rigorously and get insights that you might not be able to get by just comparing hypotheses.
+	<div w3-include-html="files/text_01.html"></div>
+	<div w3-include-html="files/text_02.html"></div>  
 
-	<p class="lh-copy">
-	What people buy in the market depends on their preferences and on what's available. Let's say we have two kinds of pots, blue and yellow, for the moment equally available, and the citizen prefers one more than the other. You can represent this preference on this slider:<br><br>
-
-	<iframe src="first_simulation.html" width="680px" height="480px"></iframe>
-	<style> iframe{ border: none; } </style>
-	<!-- <style> iframe{ border: none; } </style> -->
-
-	<p class="lh-copy">
-	This is a simulation of the broken pots that this citizen would leave behind, over their life. For instance, if it's 50%-50%, they'll probably leave a 50/50 pile of pots behind. Maybe 49/51, or 51/49. If their preference is around 75%-25%, the distribution of pots will probably be around that value as well.
-
-	<p class="lh-copy">
-	<b>Want to know more?</b> <br>
-	<i>Jerash</i> is part of Project Mercury. This is a Leverhulme Trust funded Early Career Fellowship awarded to Dr. Tom Brughmans to study the Roman economy using three case-studies to demonstrate the applicability of computer models to aid the analysis and understanding of archaeological data. 
+	<div w3-include-html="files/text_bottom.html"></div> 
 
     <p class="lh-copy">
         <a class="link dim black dib h2 w2" href="https://twitter.com/"
@@ -85,5 +101,10 @@
 
 
         </div>
+
+	<script>
+	includeHTML();
+	</script>
+
     </body>
 </html>

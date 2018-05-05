@@ -1,0 +1,41 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="p5.js"></script>
+  <script language="javascript" src="p5.dom.js"></script>
+ 
+	<script>
+	function getParamValue(paramName)
+	{
+		var url = window.location.search.substring(1); //get rid of "?" in querystring
+		var qArray = url.split('&'); //get key-value pairs
+		for (var i = 0; i < qArray.length; i++) 
+		{
+			var pArr = qArray[i].split('='); //split key and value
+			if (pArr[0] == paramName) 
+			    return pArr[1]; //return value
+		}
+	}
+
+	var simulation = getParamValue('sim');
+	</script>
+
+  <!-- <script language="javascript" type="text/javascript" src="sliders_01.js"></script> -->
+  
+	<script type="text/javascript" src="load_script_dynamically.js"></script>
+	<script type="text/javascript">
+	loadScript(simulation, function(){
+		//initialization code
+	});
+	</script>
+
+
+  <!-- this line removes any default padding and style. you might only need one of these values set.
+<style> body {padding: 0; margin: 0;} </style>
+ -->
+
+</head>
+
+<body>
+</body>
+</html>
