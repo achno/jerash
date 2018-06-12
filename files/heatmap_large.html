@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<svg width="600" height="500" stroke="#fff" stroke-width="0.5"></svg>
+
+<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3-contour.v1.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3-selection-multi.v1.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js" charset="utf-8"></script>
+
+<script language="javascript" type="text/javascript" src="p5.js"></script>
+<script language="javascript" src="p5.dom.js"></script>
+
+<script>
+
+function setup()
+{
+    // create canvas
+    createCanvas(windowWidth-20, windowHeight-20);
+	textFont("sans",25);
+}
+
+function draw_axes(plotsize)
+{
+	axisWidth = 7
+	axisLength = plotsize+20
+	strokeWeight(0)
+	fill(150)
+
+	push();
+	rect(0, 0, axisWidth, axisLength)
+	rect(2, 1*plotsize/6+30-axisWidth, -20, axisWidth)
+	rect(2, 3*plotsize/6+30-axisWidth, -20, axisWidth)
+	rect(2, 5*plotsize/6+30-axisWidth, -20, axisWidth)
+	
+	strokeWeight(0)
+    text("Small",  -95, 1*plotsize/6+35);
+    text("Medium", -125, 3*plotsize/6+35);
+    text("Large",  -95, 5*plotsize/6+35);
+	pop();
+	
+	push();
+	translate(0,axisLength);
+	rotate(-PI/2);
+	rect(0, 0, axisWidth, axisLength)
+	rect(2, 1*plotsize/6, -20, axisWidth)
+	rect(2, 3*plotsize/6, -20, axisWidth)
+	rect(2, 5*plotsize/6, -20, axisWidth)
+
+	strokeWeight(0)
+    text("Small",  -95, 1*plotsize/6+12);
+    text("Medium", -125, 3*plotsize/6+12);
+    text("Large",  -95, 5*plotsize/6+12);
+	pop();
+}
+
+
+function draw()
+{
+	/*
+	dx_axes = 150
+	dy_axes = 0
+	plotsize = 300
+
+	push();
+	translate(dx_axes,dy_axes);
+	draw_axes(plotsize);
+	pop();
+	*/
+}
+
+// D3 part 
+
+// Populate a grid of n×m values where 0 < x < 100 and 0 < y < 5000
+var n = 100, m = 100, values = new Array(n * m);
+for (var j = m-1, k = 0; j >= 0; --j) {
+  for (var i = 0; i < n; ++i, ++k) {
+    values[k] = ABratio(i / 100, j * 50);
+  }
+}
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width")-100,
+    height = +svg.attr("height");
+
+var thresholds = d3.range(0,4,0.4)
+    .map(function(p) { return Math.pow(10, p); });
+//var thresholds = d3.range(0,10000,100)
+
+var contours = d3.contours()
+    .size([n, m])
+    .thresholds(thresholds);
+
+var colour = d3.scaleLog()
+//var colour = d3.scaleLinear()
+    .domain(d3.extent(thresholds))
+    .interpolate(function() { return d3.interpolateYlGnBu; });
+    //.range(['#79D5FB','#FFE788']).interpolate(d3.interpolateRgb); // Hsl, Hcl, Rgb
+
+//var colour = d3.scaleThreshold()
+//    .domain([0,1000])
+//    .range(["red","green","blue"])
+
+svg.selectAll("path")
+  .data(contours(values))
+  .enter().append("path")
+    .attr("d", d3.geoPath(d3.geoIdentity().scale(width / n)))
+    //.attr("fill", function(d) { return "red"; });
+    .attr("fill", function(d) { return colour(d.value); });
+
+
+function ABratio(p, gap){
+    T = 5000
+    return p*T/((1-p)*(T-gap)) + 1
+}
+
+
+// make colourbar
+
+var blockheight = (width-40)/thresholds.length
+
+for (var i=0; i<thresholds.length; i++)
+{
+    svg.append('rect')
+       .attrs({ x:width+25, y:20+i*blockheight, width:30, height:blockheight,
+                fill:colour(thresholds[thresholds.length-1-i]) })
+}
+
+</script>
+

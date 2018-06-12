@@ -12,7 +12,7 @@ function setup()
 {
     // create canvas
     createCanvas(windowWidth-20, windowHeight-20);
-    textFont("sans",30);
+    textFont("sans",50);
     //fill(250);
 
     // load images
@@ -22,7 +22,7 @@ function setup()
     // create slider
     pSlider1 = createSlider(0, 100, 50);
     pSlider1.position(600, 100);
-	pSlider1.style('width', '165px');
+    pSlider1.style('width', '165px');
 
     // create button
     var col = color(242,230,213,50);
@@ -128,9 +128,9 @@ function draw()
 
 	fill(50);
     textFont("sans",30);
-    text("Change the preference between pots", 50, 45);
-	text("pot A", pSlider1.x-95 , pSlider1.y+10);
-	text("pot B", pSlider1.x+185, pSlider1.y+10);
+    //text("Change the preference between pots", 50, 45);
+	text("buy A", pSlider1.x-95 , pSlider1.y+10);
+	text("buy B", pSlider1.x+185, pSlider1.y+10);
     tent_x = 40
     tent_y = 70
 
@@ -139,6 +139,7 @@ function draw()
 
     update_simulation();
     draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)//tent_y+tent.height);
+    text("Change the preference between pots", 60, 45);
 
 
 }

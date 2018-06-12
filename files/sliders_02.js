@@ -155,8 +155,8 @@ function draw()
     textFont("sans",30);
     text("Change the preference between pots", 50, 45);
 
-	text("pot A", pSlider1.x-110 , pSlider1.y+10);
-	text("pot B", pSlider1.x+185, pSlider1.y+10);
+	text("buy A", pSlider1.x-110 , pSlider1.y+10);
+	text("buy B", pSlider1.x+185, pSlider1.y+10);
 	text("no gap",  pSlider2.x-110 , pSlider2.y+10);
 	text("big gap", pSlider2.x+185, pSlider2.y+10);
 
