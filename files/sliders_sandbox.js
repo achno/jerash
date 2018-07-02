@@ -7,12 +7,17 @@ var time, timemax;
 var p;
 var tent, peep;
 
+function preload()
+{
+    CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
+    RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+}
 
 function setup()
 {
     // create canvas
     createCanvas(windowWidth-20, windowHeight-20);
-    textFont("sans",30);
+    textFont(RobotoFont,30);
     //fill(250);
 
     // load images
@@ -277,7 +282,7 @@ function draw()
     noStroke();
 
 	fill(50);
-    textFont("sans",28);
+    textFont(RobotoFont,28);
     text("Change the usage preference", 50, 45);
 
 	dx = 10
