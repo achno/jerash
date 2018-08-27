@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8"/>
-<svg width="1000" height="525" stroke="#fff" stroke-width="0.5"></svg>
+<svg width="605" height="450" stroke="#fff" stroke-width="0.5"></svg>
 
 <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <script src="https://d3js.org/d3-contour.v1.min.js" charset="utf-8"></script>
@@ -15,7 +15,9 @@
 
 // D3 part 
 
-// Populate a grid of n×m values where 0 < x < 100 and 0 < y < 5000
+which_slice = -1
+
+// Populate a grid of n x m values where 0 < x < 100 and 0 < y < 5000
 var n = 100, m = 100, values = new Array(n * m);
 for (var j = m-1, k = 0; j >= 0; --j) {
   for (var i = 0; i < n; ++i, ++k) {
@@ -23,15 +25,20 @@ for (var j = m-1, k = 0; j >= 0; --j) {
   }
 }
 
+function ABratio(p, gap)
+{
+    T = 5000
+    return p*T/((1-p)*(T-gap)) + 1
+}
+
+
 d3.select("body").style("background-color", d3.rgb(240,240,240))
 
 var svg = d3.select("svg"),
-    //width = +svg.attr("width")-200,
-    //height = +svg.attr("height"),
-    width = 500;
-    height = 500
+    width  = 400;
+    height = width 
 
-var thresholds = d3.range(0,4,0.4)
+var thresholds = d3.range(0,3.6,0.4)
     .map(function(p) { return Math.pow(10, p); });
 
 var contours = d3.contours()
@@ -50,19 +57,35 @@ var colour = d3.scaleThreshold()
     .domain(thresholds)
     .range(['#8e0152','#c51b7d','#de77ae','#f1b6da','#fde0ef','#e6f5d0','#b8e186','#7fbc41','#4d9221','#276419'])
 
+
 svg.selectAll("path")
   .data(contours(values))
   .enter().append("path")
     .attr("d", d3.geoPath(d3.geoIdentity().scale(width / n)))
     .attr("fill", function(d) { return colour(d.value); })
-    .on( "mouseover", function(d) { which_slice=thresholds.findIndex(x => x==d.value); } )
-    .on( "mouseout", function(d) { which_slice=-1 } );
+    .attr("stroke-width",0);
 
+//highlight_colour = "darkslateblue"
+//highlight_colour = "gold"
+//highlight_colour = "moccasin"
+//highlight_colour = "whitesmoke"
+highlight_colour = "steelblue"
 
-function ABratio(p, gap)
-{
-    T = 5000
-    return p*T/((1-p)*(T-gap)) + 1
+marginx = 40
+marginy = 20
+
+var slices = svg.selectAll("path")._groups[0]
+for( var i=0; i<slices.length; i++) {
+    slices[i].setAttribute('transform','translate('+marginx+','+marginy+')')
+
+    slices[i].addEventListener("mouseover", function(d){
+    d.toElement.setAttribute("fill",highlight_colour)
+    which_slice = thresholds.findIndex( x => x==d.toElement.__data__.value )
+    });
+    slices[i].addEventListener("mouseout", function(d) {
+    d.fromElement.setAttribute("fill", colour(d.fromElement.__data__.value) );
+    which_slice = -1
+    });
 }
 
 
@@ -70,98 +93,287 @@ function ABratio(p, gap)
 
 var blockheight = (height-40)/thresholds.length
 
-cbar_labels = ['>99.9%','99.8-99.9%','99.6-99.8%','99.2-99.6%','90.8-99.2%','95-98%','87-95%','68-87%','20-68%','<20%']
-cbar_labels[1] += '\u25c4 Data is in\nthis range'
+//cbar_labels = ['>99.9%','99.8-99.9%*','99.6-99.8%','99.2-99.6%','98-99.2%','95-98%','87-95%','68-87%','20-68%','<20%']
+cbar_labels = ['>99.8%','>99.6%','>99.2%','>98%','>95%','>87%','>68%','>20%','<20%']
+//	cbar_labels[0] += '\u25c4 Data is in\nthis range'
 
 for (var i=0; i<thresholds.length; i++)
 {
     svg.append('rect')
-       .attrs({ x:width+25, y:20+i*blockheight, width:30, height:blockheight,
+       .attrs({ x:width+27+marginx, y:20+marginy+i*blockheight, width:30, height:blockheight,
                 fill:colour(thresholds[thresholds.length-1-i]) })
+    .attr("stroke-width",0);
 
     svg.append('text')
-        .attr("x", width+60)
-        .attr("y", 50+i*blockheight)
+        .attr("x", marginx+65+width)
+        .attr("y", marginy+46+i*blockheight)
         .style("font-family", "sans-serif")
-        .style("font-size", "20px")
+        .style("font-size", "22px")
+        .style("font-weight", "bold")
         .text(cbar_labels[i])
 }
 
-
+text_data = 'Data is in this range  \u25b6'
 /*
-var my_image = svg.append('image')
-    .attr('xlink:href','../images/tent.svg')
-    .attr('x', 600)
-    .attr('y', 100)
-    .attr('width', 100)
-    .attr('height', 100)
+if( which_slice == -1 )
+{
+    svg.append('rect')
+	    //.attr("rx", 6)
+	    //.attr("ry", 6)
+	    .attrs({ x:-245+width, y:20+1*blockheight, width:300, height:blockheight,
+                fill:colour(thresholds[thresholds.length-1-0]) })
+
+    svg.append('text')
+        .attr("x", -235+width)
+        .attr("y", 50+1*blockheight)
+        .style("font-family", "sans-serif")
+        .style("font-size", "25px")
+		.style('stroke', 'white')
+		.style('fill', 'white')
+        .text(text_data)
+
+}
 */
 
+// Draw axes
 
-/*
-// make axes
-svg.append('rect')
-    .attrs({ x:-5, y:20, width:30, height:blockheight,
-            fill:"lightgrey" })
-*/
+svg.append("svg:defs").append("svg:marker")
+    .attr("id", "tri")
+    .attr("refX", 4)
+    .attr("refY", 11)
+    .attr("markerWidth",  50)
+    .attr("markerHeight", 50)
+    .attr("markerUnits","userSpaceOnUse")
+    .attr("orient", "auto")
+    .append("path")
+    .attr("d", "M 0 0 22 11 0 22 3 11")
+    .style("fill", "black");
 
-/*
+var line = svg.append("line")
+    .attr("x1",0+marginx)
+    .attr("y1",400+marginy)
+    .attr("x2",0+marginx)
+    .attr("y2",0+marginy)
+    .attr("stroke","black")
+    .attr("stroke-width",6)
+    .attr("marker-end","url(#tri)");
+
+text_x = 220 - marginy
+text_y = 230 + marginx 
+svg.append('text')
+    .attr("x", 0+marginx)
+    .attr("y", 200+marginy)
+    .style("font-family", "sans-serif")
+    .style("font-size", "25px")
+    .style("font-weight", "bold")
+    .attr("transform","translate(-"+ text_x +","+ text_y +") rotate(-90)")
+    .text('Gap')
+
+var line = svg.append("line")
+    .attr("x1",0+marginx)
+    .attr("y1",400+marginy)
+    .attr("x2",400+marginx)
+    .attr("y2",400+marginy)
+    .attr("stroke","black")
+    .attr("stroke-width",6)
+    .attr("marker-end","url(#tri)");
+
+svg.append('text')
+    .attr("x", 150+marginx)
+    .attr("y", 430+marginy)
+    .style("font-family", "sans-serif")
+    .style("font-size", "25px")
+    .style("font-weight", "bold")
+    .text('Preference')
+
+
 
 // P5 part
+
+// Simulation variables
+var pile1, pile2;
+var time, timemax;
+var p;
+var tent, peep;
+var old_whichslice;
+
+// Simulation parameters
+var preference, time_b;
+var prefs = [
+                90, 90, 90,
+                10, 50, 50,
+                10, 3, 10
+            ];
+var timeb = [
+                4000, 2500, 0,
+                4500, 2500, 0,
+                4500, 3000, 0
+            ];
+
+function preload()
+{
+    CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
+    RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+    //RobotoFont    = loadFont('fonts/Roboto-Bold.ttf')
+}
+
 function setup()
 {
     // create canvas
-    createCanvas(windowWidth-20, windowHeight-20);
+    createCanvas(400,400);
     textFont("sans",25);
+
+    // Tent part
+
+    // load images
+    tent   = loadImage("../images/tent.svg");
+    peep   = loadImage("../images/peep.png");
+
+    // setup simulation variables
+    pA = 0;
+    pB = 0;
+    timemax = 5000;
+    time = -1;
 }
 
-function draw_axes(plotsize)
+function draw_tent(x,y)
 {
-	axisWidth = 7
-	axisLength = plotsize+20
-	strokeWeight(0)
-	fill(150)
-
-	push();
-	rect(0, 0, axisWidth, axisLength)
-	rect(2, 1*plotsize/6+30-axisWidth, -20, axisWidth)
-	rect(2, 3*plotsize/6+30-axisWidth, -20, axisWidth)
-	rect(2, 5*plotsize/6+30-axisWidth, -20, axisWidth)
-	
-	strokeWeight(0)
-        text("Small",  -95, 1*plotsize/6+35);
-        text("Medium", -125, 3*plotsize/6+35);
-        text("Large",  -95, 5*plotsize/6+35);
-	pop();
-	
-	push();
-	translate(0,axisLength);
-	rotate(-PI/2);
-	rect(0, 0, axisWidth, axisLength)
-	rect(2, 1*plotsize/6, -20, axisWidth)
-	rect(2, 3*plotsize/6, -20, axisWidth)
-	rect(2, 5*plotsize/6, -20, axisWidth)
-
-	strokeWeight(0)
-        text("Small",  -95, 1*plotsize/6+12);
-        text("Medium", -125, 3*plotsize/6+12);
-        text("Large",  -95, 5*plotsize/6+12);
-	pop();
+    push();
+    translate(x,y);
+    scale(0.60)
+    image(tent,0,0);
+    pop();
 }
+
+
+function reset_simulation()
+{
+    pA = 0; pB = 0; time = 0;
+}
+
+function update_simulation()
+{
+    if( ( time >= 0 ) && (time < timemax) )
+    {
+        for(dt=0; dt<timemax/100; dt++)
+        {
+            var r = random(100);
+            if( time < time_b )
+            {
+                r = 101;
+            }
+            if( r > preference )
+            {
+                pA += 1;
+            }
+            else
+            {
+                pB += 1;
+            }
+            time += 1;
+        }
+        //console.log(pA,pB,time);
+    }
+}
+
+function draw_simulation(x, y)
+{
+    var c_stroke;
+    if( ( time > 0 ) && (time <= timemax) )
+    {
+        push();
+            strokeWeight(4);
+            translate(x,y);
+            height = 220; //263;
+
+            var fa = height*pA/timemax
+            var fb = height*pB/timemax
+            push();
+                c_stroke = color(0,204,255);
+                stroke(c_stroke);
+                fill(color('#79D5FB'));
+                rect(100,200,50,-fa);
+                
+                noStroke();
+                fill(c_stroke);
+                percent_a = round(pA/(pA+pB)*100)
+                textFont(RobotoFont,25);
+                text(percent_a+"%", 100, 200-fa-7);
+            pop();
+            push();
+                c_stroke = color(255,204,0);
+                stroke(c_stroke);
+                fill(color('#FFE788'));
+                rect(200,200,50,-fb);
+                
+                noStroke();
+                fill(c_stroke);
+                percent_b = round(pB/(pA+pB)*100)
+                textFont(RobotoFont,25);
+                text(percent_b+"%", 200, 200-fb-7);
+            pop();
+        pop();
+    }
+}
+
+function change_rect(which_slice)
+{
+    if( which_slice != old_whichslice )
+        change = true
+    else
+        change = false
+
+    old_whichslice = which_slice
+    return change;
+}
+
 
 function draw()
 {
-	dx_axes = 150
-	dy_axes = 0
-	plotsize = 300
-        background(240)
+    translate(0,-10);
 
-	push();
-	translate(dx_axes,dy_axes);
-	draw_axes(plotsize);
-	pop();
+    dx_axes = 0
+    dy_axes = 50
+    plotsize = 300
+    background(240)
+
+    tent_x = dx_axes //+ plotsize*1.35
+    tent_y = dy_axes
+    draw_tent(tent_x, tent_y)
+    //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
+
+    // Simulation to reset if a change in rectangle happens
+    if( change_rect(which_slice) )
+    {
+        reset_simulation(which_slice)
+        if( which_slice >= 0 )
+        {
+            preference = prefs[which_slice]
+            time_b     = timeb[which_slice]
+            //console.log(preference,time_b)
+        }
+    }
+
+    push();
+    fill(color('#276419'));
+    textFont("sans",25)
+    text('\u25c4 ', dx_axes-5, dy_axes-22)
+    pop()
+    push()
+    fill(color('#276419'));
+    textFont(RobotoFont,25);
+    text('Data is in this range', dx_axes+25, dy_axes-22)
+    //text('Data is in the >99.8% range', dx_axes+25, dy_axes-22)
+    pop()
+
+    //.range(['#8e0152','#c51b7d','#de77ae','#f1b6da','#fde0ef','#e6f5d0','#b8e186','#7fbc41','#4d9221','#276419'])
+
+    if( which_slice >= 0 )
+    {
+        update_simulation()
+        draw_simulation(tent_x+0.02*tent.width, tent_y+0.23*tent.height)
+    }
+
 }
-
-*/
 
 </script>

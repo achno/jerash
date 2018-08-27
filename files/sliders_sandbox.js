@@ -25,7 +25,7 @@ function setup()
     peep   = loadImage("../images/peep.png");
 
     // setup simulation variables
-	n_pots = 50;
+    n_pots = 50;
     pA = n_pots/2;
     pB = n_pots/2;
     pAtot = 0;
@@ -36,15 +36,19 @@ function setup()
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
     pSlider1.position(715, 100);
-	pSlider1.style('width', '100px');
+    pSlider1.style('width', '100px');
 
     pSlider2 = createSlider(0, timemax, 0);
     pSlider2.position(715, 150);
-	pSlider2.style('width', '100px');
+    pSlider2.style('width', '100px');
 
-	pSlider3 = createSlider(1, 99, 50);
+    pSlider3 = createSlider(1, 99, 50);
     pSlider3.position(715, 200);
-	pSlider3.style('width', '100px');
+    pSlider3.style('width', '100px');
+
+    pSlider4 = createSlider(0, n_pots, n_pots/2);
+    pSlider4.position(715, 250);
+    pSlider4.style('width', '100px');
 
     // create button
     var col = color(242,230,213,50);
@@ -52,7 +56,7 @@ function setup()
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(pSlider3.x-100,pSlider3.y+40);
+    button.position(pSlider4.x-100,pSlider4.y+40);
 
 }
 
@@ -60,14 +64,18 @@ function setup()
 function run_simulation()
 {
     preference = pSlider1.value();
-	time_b     = pSlider2.value();
-	use_pref   = pSlider3.value();
+    time_b     = pSlider2.value();
+    use_pref   = pSlider3.value();
+    init_con   = pSlider4.value();
     reset_simulation();
 }
 
 function reset_simulation()
 {
-    pA = n_pots/2; pB = n_pots/2; time = 0; pAtot = 0; pBtot = 0;
+    time = 0;
+    //pA = n_pots/2; pB = n_pots/2;
+    pA = n_pots - init_con; pB = init_con;
+    pAtot = 0; pBtot = 0;
 }
 
 function update_simulation()
@@ -78,11 +86,11 @@ function update_simulation()
         {
             var r = random(100);
 
-			if (time < time_b )
-			{
-				r = 101;
-			}
-			//console.log(time, r, time_b, preference)
+            if (time < time_b )
+            {
+                r = 101;
+            }
+            //console.log(time, r, time_b, preference)
 
             if( r > preference )
             {
@@ -109,9 +117,9 @@ function update_simulation_two_step()
 	    	var r2 = random(100);
 			var ifbreak = 0;
 	    	if (time < time_b )
-	   	 	{
-			r = 101;
-			r2 = 101;
+                {
+                    r = 101;
+                    r2 = 101;
 	    	}
        	    //console.log(time, r, time_b, preference)
 	   		 // INSERT STUFFS HERE
@@ -186,7 +194,7 @@ function draw_simulation(x, y)
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 180;
+            height = 160;
 
             var fa = 0.9*height*pA/n_pots //(pA+pB)
             var fb = 0.9*height*pB/n_pots //(pA+pB)
@@ -196,7 +204,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#79D5FB'));
-		            rect(100,200,50,-fa);
+		            rect(105,200,50,-fa);
 		            percent_a = round(pA/(pA+pB)*100)
 				}
 				else
@@ -205,7 +213,7 @@ function draw_simulation(x, y)
 				}
 	            noStroke();
 	            fill(c_stroke);
-	            text(pA, 100, 200-fa-7);
+	            text(pA, 105, 200-fa-7);
             pop();
             push();
 	            c_stroke = color(255,204,0);
@@ -213,7 +221,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#FFE788'));
-		            rect(200,200,50,-fb);
+		            rect(195,200,50,-fb);
 		            percent_b = round(pB/(pA+pB)*100)
 				}
 				else
@@ -222,7 +230,7 @@ function draw_simulation(x, y)
 				}		           
 	            noStroke();
 	            fill(c_stroke);
-	            text(pB, 200, 200-fb-7);
+	            text(pB, 195, 200-fb-7);
             pop();
             
             translate(300,0);
@@ -251,7 +259,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#FFE788'));
-		            rect(200,200,50,-fb);
+		            rect(190,200,50,-fb);
 		            percent_b = round(pBtot/(pAtot+pBtot)*100)
 				}
 				else
@@ -260,7 +268,7 @@ function draw_simulation(x, y)
 				}		           
 	            noStroke();
 	            fill(c_stroke);
-	            text(percent_b+"%", 200, 200-fb-7);
+	            text(percent_b+"%", 190, 200-fb-7);
             pop();
         pop();
     }
@@ -278,22 +286,23 @@ function draw_tent(x,y)
 function draw()
 {
     //background(125);
-	background(240);
+    background(240);
     noStroke();
 
-	fill(50);
+    fill(50);
     textFont(RobotoFont,28);
     text("Change the usage preference", 50, 45);
 
-	dx = 10
+    dx = 10
 
-	text("buy A",   pSlider1.x-90-dx , pSlider1.y+10);
-	text("buy B",   pSlider1.x+120-dx, pSlider1.y+10);
-	text("no gap",  pSlider2.x-90-dx , pSlider2.y+10);
-	text("big gap", pSlider2.x+120-dx, pSlider2.y+10);
-	text("use A",   pSlider3.x-90-dx , pSlider3.y+10);
-	text("use B",   pSlider3.x+120-dx, pSlider3.y+10);
-
+    text("buy A",   pSlider1.x-90-dx , pSlider1.y+10);
+    text("buy B",   pSlider1.x+120-dx, pSlider1.y+10);
+    text("no gap",  pSlider2.x-90-dx , pSlider2.y+10);
+    text("big gap", pSlider2.x+120-dx, pSlider2.y+10);
+    text("use A",   pSlider3.x-90-dx , pSlider3.y+10);
+    text("use B",   pSlider3.x+120-dx, pSlider3.y+10);
+    text("init A",  pSlider4.x-90-dx , pSlider4.y+10);
+    text("init B",  pSlider4.x+120-dx, pSlider4.y+10);
 
     tent_x = 20
     tent_y = 70
