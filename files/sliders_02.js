@@ -21,7 +21,7 @@ function setup()
     //fill(250);
 
     // load images
-    tent   = loadImage("../images/tent.svg");
+    tent   = loadImage("../images/tent.png");
     peep   = loadImage("../images/peep.png");
 
     // setup simulation variables
@@ -165,14 +165,14 @@ function draw()
 	text("no gap",  pSlider2.x-110 , pSlider2.y+10);
 	text("big gap", pSlider2.x+185, pSlider2.y+10);
 
-    tent_x = 40
+    tent_x = 5
     tent_y = 70
 
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
     update_simulation();
-    draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)//tent_y+tent.height);
+    draw_simulation(tent_x+0.09*tent.width, tent_y+0.27*tent.height)//tent_y+tent.height);
 
 
 }

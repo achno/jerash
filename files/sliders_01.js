@@ -6,6 +6,7 @@ var pile1, pile2;
 var time, timemax;
 var p;
 var tent, peep;
+var localpot, africanpot;
 
 
 function preload()
@@ -23,9 +24,11 @@ function setup()
     //fill(250);
 
     // load images
-    tent   = loadImage("../images/tent.svg");
+    tent   = loadImage("../images/tent.png");
     peep   = loadImage("../images/peep.png");
-
+	localpot   = loadImage("../images/local_pottery.png");
+	africanpot   = loadImage("../images/african_red_slip.png");
+	
     // create slider
     pSlider1 = createSlider(0, 100, 50);
     pSlider1.position(600, 100);
@@ -97,7 +100,8 @@ function draw_simulation(x, y)
                 stroke(c_stroke);
                 fill(color('#79D5FB'));
                 rect(100,200,50,-fa);
-                
+                //image(localpot,95, 195, localpot.width/3, localpot.height/3);
+
                 noStroke();
                 fill(c_stroke);
                 percent_a = round(pA/(pA+pB)*100)
@@ -108,11 +112,13 @@ function draw_simulation(x, y)
                 stroke(c_stroke);
                 fill(color('#FFE788'));
                 rect(200,200,50,-fb);
+                //image(africanpot,205, 180, africanpot.width/3, africanpot.height/3);
                 
                 noStroke();
                 fill(c_stroke);
                 percent_b = round(pB/(pA+pB)*100)
                 text(percent_b+"%", 200, 200-fb-7);
+
             pop();
         pop();
     }
@@ -127,6 +133,8 @@ function draw_tent(x,y)
     pop();
 }
 
+
+
 function draw()
 {
     //background(125);
@@ -138,14 +146,14 @@ function draw()
     //text("Change the preference between pots", 50, 45);
 	text("buy A", pSlider1.x-95 , pSlider1.y+10);
 	text("buy B", pSlider1.x+185, pSlider1.y+10);
-    tent_x = 40
+    tent_x = 5
     tent_y = 70
 
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
     update_simulation();
-    draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)//tent_y+tent.height);
+    draw_simulation(tent_x+0.09*tent.width, tent_y+0.27*tent.height)//tent_y+tent.height);
     text("Change the preference between pots", 60, 45);
 
 

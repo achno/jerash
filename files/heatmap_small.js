@@ -18,6 +18,11 @@ var timeb = [
                 4500, 2500, 0,
                 4500, 3000, 0
             ];
+var allfits = [
+                0, 0, 0,
+                1, 0, 0,
+                1, 1, 0
+            ];
 
 function preload()
 {
@@ -34,8 +39,10 @@ function setup()
     // Tent part
 
     // load images
-    tent   = loadImage("../images/tent.svg");
+    tent   = loadImage("../images/tent.png");
     peep   = loadImage("../images/peep.png");
+    mark_yes = loadImage("../images/mark_yes.png");
+    mark_no = loadImage("../images/mark_no.png");
 
     // setup simulation variables
     pA = 0;
@@ -224,13 +231,17 @@ function update_simulation()
 
 function draw_simulation(x, y)
 {
+    xgap    = 70;
+    rect1_x = 115;
+    rect_y  = 142;
+    height = 200; //263;
     var c_stroke;
+
     if( ( time > 0 ) && (time <= timemax) )
     {
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 263;
 
             var fa = height*pA/timemax
             var fb = height*pB/timemax
@@ -238,23 +249,23 @@ function draw_simulation(x, y)
                 c_stroke = color(0,204,255);
                 stroke(c_stroke);
                 fill(color('#79D5FB'));
-                rect(100,200,50,-fa);
+                rect(rect1_x,rect_y,50,-fa);
                 
                 noStroke();
                 fill(c_stroke);
                 percent_a = round(pA/(pA+pB)*100)
-                text(percent_a+"%", 100, 200-fa-7);
+                text(percent_a+"%", rect1_x, rect_y-fa-7);
             pop();
             push();
                 c_stroke = color(255,204,0);
                 stroke(c_stroke);
                 fill(color('#FFE788'));
-                rect(200,200,50,-fb);
+                rect(rect1_x+xgap,rect_y,50,-fb);
                 
                 noStroke();
                 fill(c_stroke);
                 percent_b = round(pB/(pA+pB)*100)
-                text(percent_b+"%", 200, 200-fb-7);
+                text(percent_b+"%", rect1_x+xgap,rect_y-fb-7);
             pop();
         pop();
     }
@@ -264,9 +275,24 @@ function draw_tent(x,y)
 {
     push();
     translate(x,y);
-    scale(0.65)
+    scale(0.55)
     image(tent,0,0);
+
+    if( time == timemax )
+        draw_checkmark(0,0,fits);
+
     pop();
+}
+
+function draw_checkmark(x,y,fits)
+{
+    mark_x = tent.width-75
+    mark_y = -50
+    mark_size = 120
+    if( fits == 1 )
+        image(mark_yes, mark_x, mark_y, mark_size, mark_size) 
+    else
+        image(mark_no, mark_x, mark_y, mark_size, mark_size)
 }
 
 
@@ -292,8 +318,8 @@ function draw()
     draw_axes(plotsize);
     pop();
 
-    tent_x = dx_axes + plotsize*1.35
-    tent_y = dy_axes
+    tent_x = dx_axes + plotsize*1.35 - 30
+    tent_y = dy_axes + 20
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
@@ -305,6 +331,8 @@ function draw()
         {
             preference = prefs[which_rect]
             time_b     = timeb[which_rect]
+            fits       = allfits[which_rect]
+
             //console.log(preference,time_b)
         }
     }

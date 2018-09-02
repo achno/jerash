@@ -5,7 +5,7 @@ var pSlider1;
 var pile1, pile2;
 var time, timemax;
 var p;
-var tent, peep;
+var tent, peep, tent2;
 
 function preload()
 {
@@ -21,7 +21,8 @@ function setup()
     //fill(250);
 
     // load images
-    tent   = loadImage("../images/tent.svg");
+    tent   = loadImage("../images/house_temp.png");
+    tent2   = loadImage("../images/shardmountain.png");
     peep   = loadImage("../images/peep.png");
 
     // setup simulation variables
@@ -35,7 +36,7 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(715, 100);
+    pSlider1.position(745, 100);
 	pSlider1.style('width', '100px');
 
 	/*
@@ -45,7 +46,7 @@ function setup()
 	*/
 
 	pSlider3 = createSlider(1, 99, 50);
-    pSlider3.position(715, 150);
+    pSlider3.position(745, 150);
 	pSlider3.style('width', '100px');
 
     // create button
@@ -198,7 +199,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#79D5FB'));
-		            rect(100,200,50,-fa);
+		            rect(105,200,50,-fa);
 		            percent_a = round(pA/(pA+pB)*100)
 				}
 				else
@@ -207,7 +208,7 @@ function draw_simulation(x, y)
 				}
 	            noStroke();
 	            fill(c_stroke);
-	            text(pA, 100, 200-fa-7);
+	            text(pA, 105, 200-fa-7);
             pop();
             push();
 	            c_stroke = color(255,204,0);
@@ -215,7 +216,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#FFE788'));
-		            rect(200,200,50,-fb);
+		            rect(175,200,50,-fb);
 		            percent_b = round(pB/(pA+pB)*100)
 				}
 				else
@@ -224,7 +225,7 @@ function draw_simulation(x, y)
 				}		           
 	            noStroke();
 	            fill(c_stroke);
-	            text(pB, 200, 200-fb-7);
+	            text(pB, 180, 200-fb-7);
             pop();
             
             translate(300,0);
@@ -276,7 +277,14 @@ function draw_tent(x,y)
     image(tent,0,0);
     pop();
 }
-
+function draw_tent2(x,y)
+{
+    push();
+    translate(x,y);
+    scale(0.45)
+    image(tent2,0,0);
+    pop();
+}
 function draw()
 {
     //background(125);
@@ -299,19 +307,19 @@ function draw()
 	text("use B",   pSlider3.x+120-dx, pSlider3.y+10);
 
 
-    tent_x = 20
+    tent_x = 0
     tent_y = 70
 
-    draw_tent(tent_x, tent_y)
-    text("Pots in houses", tent_x+40, tent_y+290);
-    draw_tent(tent_x+300, tent_y)
-    text("Pots in pile", tent_x+370, tent_y+290);
+    draw_tent(tent_x, tent_y+175)
+    text("Pots in houses", tent_x+60, tent_y+290);
+    draw_tent2(tent_x+315, tent_y+196.7)
+    text("Pots in pile", tent_x+395, tent_y+290);
 
 
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
     update_simulation_two_step();
-    draw_simulation(tent_x-30, tent_y+40)//tent_y+tent.height);
+    draw_simulation(tent_x-5, tent_y+40)//tent_y+tent.height);
 
 
 }
