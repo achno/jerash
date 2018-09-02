@@ -27,7 +27,7 @@ function setup()
     tent   = loadImage("../images/tent.png");
     peep   = loadImage("../images/peep.png");
 	localpot   = loadImage("../images/local_pottery.png");
-	africanpot   = loadImage("../images/african_red_slip.png");
+//	africanpot   = loadImage("../images/african_red_slip.png");
 	
     // create slider
     pSlider1 = createSlider(0, 100, 50);
