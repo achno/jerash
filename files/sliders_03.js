@@ -36,12 +36,12 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(745, 100);
+    pSlider1.position(730, 75);
     pSlider1.style('width', '100px');
     preference = pSlider1.value();
 
     pSlider2 = createSlider(0, n_pots, n_pots/2);
-    pSlider2.position(745, 150);
+    pSlider2.position(730, 150);
     pSlider2.style('width', '100px');
     init_con   = pSlider2.value();
 
@@ -49,25 +49,25 @@ function setup()
     //button = createButton('&#9658; PLAY');
     var col = color(242,230,213,50);
     var gapsize = 45;
-    var initgap = 12;
+    var initgap = 23;
 
-    buttonA = createButton('USE A');
+    buttonA = createButton('USE LOCAL');
     buttonA.style('background-color',col)
     buttonA.style('font-size','25px');
     buttonA.mousePressed(useA);
-    buttonA.position(pSlider2.x-100,pSlider2.y+gapsize-initgap);
+    buttonA.position(pSlider2.x-75,pSlider2.y+gapsize+initgap);
 
-    buttonB = createButton('USE B');
+    buttonB = createButton('USE IMPORTED');
     buttonB.style('background-color',col)
     buttonB.style('font-size','25px');
     buttonB.mousePressed(useB);
-    buttonB.position(pSlider2.x-100,pSlider2.y+gapsize*2-initgap);
+    buttonB.position(pSlider2.x-75,pSlider2.y+gapsize*2+initgap);
 
     buttonR = createButton('RESET');
     buttonR.style('background-color',col)
     buttonR.style('font-size','25px');
     buttonR.mousePressed(run_simulation);
-    buttonR.position(pSlider2.x-100,pSlider2.y+gapsize*3-initgap);
+    buttonR.position(pSlider2.x-75,pSlider2.y+gapsize*3+initgap);
 
     reset_simulation();
 
@@ -262,18 +262,20 @@ function draw()
 
     dx = 10
 
-    text("buy A",   pSlider1.x-90-dx , pSlider1.y+10);
-    text("buy B",   pSlider1.x+120-dx, pSlider1.y+10);
-    text("init A",  pSlider2.x-90-dx , pSlider2.y+10);
-    text("init B",  pSlider2.x+120-dx, pSlider2.y+10);
-
+    textFont(RobotoFont,20);
+    
+    text("Buy\nlocal",                   pSlider1.x-72-dx , pSlider1.y-2);
+    text("Buy\nimported",                pSlider1.x+112-dx, pSlider1.y-2);
+    text("Initial\nnumber\nof local",    pSlider2.x-72-dx , pSlider2.y-12);
+    text("Initial\nnumber of\nimported", pSlider2.x+112-dx, pSlider2.y-12);
+    
     tent_x = 0
     tent_y = 70
 
     draw_tent(tent_x, tent_y+175)
     text("Pots in houses", tent_x+60, tent_y+290);
     draw_tent2(tent_x+315, tent_y+196.7)
-    text("Pots in pile", tent_x+395, tent_y+290);
+    text("Discarded broken pots", tent_x+330, tent_y+290);
 
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 

@@ -88,6 +88,8 @@ for( var i=0; i<slices.length; i++) {
     });
     slices[i].addEventListener("mouseout", function(d) {
     d.fromElement.setAttribute("fill", colour(d.fromElement.__data__.value) );
+
+    aaa = d
     which_slice = -1
     });
 }

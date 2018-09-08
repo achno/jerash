@@ -31,8 +31,8 @@ function setup()
 	
     // create slider
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(600, 100);
-    pSlider1.style('width', '165px');
+    pSlider1.position(620, 150);
+    pSlider1.style('width', '150px');
 
     // create button
     var col = color(242,230,213,50);
@@ -142,10 +142,9 @@ function draw()
     noStroke();
 
 	fill(50);
-    textFont(RobotoFont,30);
-    //text("Change the preference between pots", 50, 45);
-	text("buy A", pSlider1.x-95 , pSlider1.y+10);
-	text("buy B", pSlider1.x+185, pSlider1.y+10);
+    textFont(RobotoFont,25);
+	text("Buy local",    pSlider1.x-120 , pSlider1.y+10);
+	text("Buy imported", pSlider1.x+155, pSlider1.y+10);
     tent_x = 5
     tent_y = 70
 
@@ -154,6 +153,7 @@ function draw()
 
     update_simulation();
     draw_simulation(tent_x+0.09*tent.width, tent_y+0.27*tent.height)//tent_y+tent.height);
+    textFont(RobotoFont,30);
     text("Change the preference between pots", 60, 45);
 
 

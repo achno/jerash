@@ -36,18 +36,12 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(745, 100);
-	pSlider1.style('width', '100px');
-
-	/*
-    pSlider2 = createSlider(0, timemax, 0);
-    pSlider2.position(715, 150);
-	pSlider2.style('width', '100px');
-	*/
+    pSlider1.position(685, 100);
+	pSlider1.style('width', '90px');
 
 	pSlider3 = createSlider(1, 99, 50);
-    pSlider3.position(745, 150);
-	pSlider3.style('width', '100px');
+    pSlider3.position(685, 150);
+	pSlider3.style('width', '90px');
 
     // create button
     var col = color(242,230,213,50);
@@ -55,7 +49,7 @@ function setup()
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(pSlider3.x-100,pSlider3.y+40);
+    button.position(pSlider3.x-110,pSlider3.y+40);
 
 }
 
@@ -297,14 +291,11 @@ function draw()
 
 	dx = 10
 
-	text("buy A",   pSlider1.x-90-dx , pSlider1.y+10);
-	text("buy B",   pSlider1.x+120-dx, pSlider1.y+10);
-	/*
-	text("no gap",  pSlider2.x-90-dx , pSlider2.y+10);
-	text("big gap", pSlider2.x+120-dx, pSlider2.y+10);
-	*/
-	text("use A",   pSlider3.x-90-dx , pSlider3.y+10);
-	text("use B",   pSlider3.x+120-dx, pSlider3.y+10);
+    textFont(RobotoFont,25);
+	text("Buy local",    pSlider1.x-105-dx, pSlider1.y+10);
+	text("Buy imported", pSlider1.x+100-dx, pSlider1.y+10);
+	text("Use local",    pSlider3.x-105-dx, pSlider3.y+10);
+	text("Use imported", pSlider3.x+100-dx, pSlider3.y+10);
 
 
     tent_x = 0
@@ -313,7 +304,7 @@ function draw()
     draw_tent(tent_x, tent_y+175)
     text("Pots in houses", tent_x+60, tent_y+290);
     draw_tent2(tent_x+315, tent_y+196.7)
-    text("Pots in pile", tent_x+395, tent_y+290);
+    text("Discarded broken pots", tent_x+330, tent_y+290);
 
 
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)

@@ -181,9 +181,9 @@ function draw_axes(plotsize)
         text("Medium", -125, 3*plotsize/6+12);
         text("Large",  -95,  5*plotsize/6+12);
         */
-        text("Prefer B", -125, 1*plotsize/6+12);
-        text("50/50",    -100, 3*plotsize/6+12);
-        text("Prefer A", -125, 5*plotsize/6+12);
+        text("Prefer\nimported", -125, 1*plotsize/6);
+        text("50/50",            -100, 3*plotsize/6+12);
+        text("Prefer\nlocal",    -100, 5*plotsize/6);
 	pop();
 }
 

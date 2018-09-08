@@ -32,12 +32,12 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(615, 100);
-	pSlider1.style('width', '165px');
+    pSlider1.position(620, 140);
+	pSlider1.style('width', '150px');
 
-    pSlider2 = createSlider(0, timemax, 0);
-    pSlider2.position(615, 150);
-	pSlider2.style('width', '165px');
+    pSlider2 = createSlider(0, timemax, 0.25*timemax);
+    pSlider2.position(620, 190);
+	pSlider2.style('width', '150px');
 
     // create button
     var col = color(242,230,213,50);
@@ -160,10 +160,11 @@ function draw()
     textFont(RobotoFont,30);
     text("Change the preference between pots", 50, 45);
 
-	text("buy A", pSlider1.x-110 , pSlider1.y+10);
-	text("buy B", pSlider1.x+185, pSlider1.y+10);
-	text("no gap",  pSlider2.x-110 , pSlider2.y+10);
-	text("big gap", pSlider2.x+185, pSlider2.y+10);
+    textFont(RobotoFont,25);
+    text("Buy local",    pSlider1.x-120, pSlider1.y+10);
+    text("Buy imported", pSlider1.x+155, pSlider1.y+10);
+	text("Small gap",    pSlider2.x-120, pSlider2.y+10);
+	text("Big gap",      pSlider2.x+155, pSlider2.y+10);
 
     tent_x = 5
     tent_y = 70
