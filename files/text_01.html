@@ -1,15 +1,42 @@
 	<p class="lh-copy">
-	Something curious about Jerash is that almost all of the ceramic remains found here were locally produced (more than 99% of it!). This phenomenon is quite unique, especially since other urban centres in the regions show more diversity in the ceramic assemblages found there.
+	Ancient Gerasa, now known as Jerash, was a city in northern Jordan which flourished for several centuries from late Hellenistic times through the Roman, Byzantine and early Islamic periods. The city is known from ancient sources and is mentioned, among other ancient authors, by Pliny as being one of the Decapolis cities of the Roman period, all but one of which were located on the east side of the Jordan valley in southern Syria. Jerash was an ordinary middle-sized ancient city covering approximately 90 hectares within its Roman period city walls. Jerash had all the typical features of an ancient city including a network of streets, sanctuaries, a city council building also used as a theatre, bath complexes, market squares and domestic architecture. Later, numerous churches were constructed in Jerash, as well as one of the earliest mosques known to us. Jerash therefore makes a great case study for understanding how an ordinary ancient city in the region worked.
 
 	<p class="lh-copy">
-	There are a couple hypotheses to explain what's happening. You might think that thinking critically you might be able to figure out which one. Here we'll introduce you to a tool that can help you reason rigorously and get insights that you might not be able to get by just comparing hypotheses.
+	However, something curious about Jerash is that almost all of the ceramic remains found here were locally produced during a period of six centuries (more than 99% of it!). Have a look at this figure showing almost a million ceramic pottery shards from across the site of Jerash and dated to a period of six centuries from the Roman to the early Islamic period: just a handful are overseas or regional imports!
+
+	<img src="../../jerash/images/bar_plot.jpg" alt="Bar plot showing the amount of pottery shards in Jerash" height="500px"><br>
+	Figure © Iza Romanowska. Data © Ceramics in Context project and the Danish-German Jerash Northwest Quarter Project.
 
 	<p class="lh-copy">
-	What people buy in the market depends on their preferences and on what's available. Let's say we have two kinds of pots, blue and yellow, for the moment equally available, and the citizen prefers one more than the other. You can represent this preference on this slider:<br><br>
+	This phenomenon is quite unique, especially since other urban centres in the region and other Decapolis cities show more diversity in the ceramics found there.
+
+	<p class="lh-copy">
+	There are a couple of hypotheses to explain what's happening:
+	<ul>
+	<li>Jerash was too far away from the coast and major roads to get imports?</li>
+	<li>Jerash was too small a town to be attractive to foreign traders?</li>
+	<li>Jerash did not have a need for imports because it was a big producer itself?</li>
+	<li>Jerash had other priorities and spent its money on different goods and projects?</li>
+	</ul>
+
+	<p class="lh-copy">
+	These are all fine explanations, but they cannot explain the extreme nature of the data pattern: for six centuries this middle sized city that has plenty of evidence of imported goods other than ceramics and of being strongly politically integrated with the Roman and later Byzantine empire, has hardly any evidence of imported pottery and has little diversity in pottery shapes for a period of six centuries! Think about that for a moment: for 600 years the tens of thousands of inhabitants of the city were perfectly content with using the same shapes of bowls and cups whilst the political context changed dramatically following the fall of the Roman empire in the west, and the rise of Islamic empires.
+
+	<p class="lh-copy">
+	This is why we want to explore other theories as well. Can a personal preference and individual choice for locally produced ceramics explain this archaeological material?
+
+	<p class="lh-copy">
+	Now you might think that this is an easy and intuitive question to answer. Surely if the people of Jerash had a preference then we would just expect the local product to be far more common than the imported product. However, we will show that even simple theories can have unexpected and counter-intuitive results, and that this problem is magnified tenfold when we combine different theories in a single model!
+
+	<p class="lh-copy">
+	This is why we need computational simulation modelling! To help you reason rigorously about the implications of different theories, to be able to distinguish between the effects of different theories, and to be able to say something about the probability of different theories.
+
+	<p class="lh-copy">
+	Let's make our first computational model of pottery preference. Say we go to the Jerash market and there are two kinds of pots, local and imported (on the left and right of the figure below). For the moment both are equally available on the market place, and the inhabitant of Jerash prefers one more than the other. You can simulate what the difference is for the proportion of local VS imported ceramics by changing a slider representing buyers’ preference for one or the other product:<br><br>
 
 	<iframe src="files/run_simulation.html?sim=sliders_01.js" width="960px" height="480px"></iframe>
 	<style> iframe{ border: none; } </style>
 	<!-- <style> iframe{ border: none; } </style> -->
 
 	<p class="lh-copy">
-	This is a simulation of the broken pots that this citizen would leave behind, over their life. For instance, if it's 50%-50%, they'll probably leave a 50/50 pile of pots behind. Maybe 49/51, or 51/49. If their preference is around 75%-25%, the distribution of pots will probably be around that value as well.
+	This is a simple simulation of the broken pots that this buyer would leave behind over their lifetime. For instance, if the preference is 50%-50%, they'll probably leave a 50/50 pile of pots behind. Maybe 49/51 or 51/49 because in simulations like this the preference slider represents a probability that a certain pot will be bought, not a certainty. If their preference is around 75%-25%, the distribution of pots will probably be around 75/25 as well.

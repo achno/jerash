@@ -47,6 +47,8 @@ article, aside, footer, header, nav, section { display: block; }
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 { font-size: 2em; margin: .67em 0; }
+/* Add margin for list elements */
+li{ margin: 10px 0; }
 /* Grouping content
    ========================================================================== */
 /**
