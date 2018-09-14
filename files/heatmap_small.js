@@ -91,11 +91,6 @@ function check_rectangles(x, y, plotsize)
     // if the mouse is inside a given rectangle,
     // highlight "fits data" or "doesn't fit data"
 
-    width = plotsize
-    height = plotsize
-    data = [ 0,0,0, 1,0,0, 1,1,0 ] 
-    textdata = [ 'DOESN\'T\nFIT DATA', 'FITS\nDATA' ]
-
     blocksize = width/3
 
     stroke('w')
@@ -133,13 +128,13 @@ function write_rectangles(which_rect,plotsize)
 
     if( data[which_rect] > 0 )
     {
-        textFont(CondensedFont,25);
+        textFont(CondensedFont,22);
         epx = 0.2
         epy = 0.42
     }
     else
     {
-        textFont(CondensedFont,21);
+        textFont(CondensedFont,20);
         epx = 0.065
         epy = 0.43
     }
@@ -162,28 +157,25 @@ function draw_axes(plotsize)
 	rect(2, 5*plotsize/6+30-axisWidth, -20, axisWidth)
 	
 	strokeWeight(0)
-        text("Small gap",  -145, 5*plotsize/6+35);
-        text("Medium gap", -175, 3*plotsize/6+35);
-        text("Large gap",  -145, 1*plotsize/6+35);
+    textFont(RobotoFont,24);
+    text("Small gap",  -132, 5*plotsize/6+33);
+    text("Medium gap", -157, 3*plotsize/6+33);
+    text("Large gap",  -132, 1*plotsize/6+33);
 	pop();
 	
 	push();
 	translate(0,axisLength);
 	rotate(-PI/2);
+    textFont(RobotoFont,24);
 	rect(0, 0, axisWidth, axisLength)
 	rect(2, 1*plotsize/6, -20, axisWidth)
 	rect(2, 3*plotsize/6, -20, axisWidth)
 	rect(2, 5*plotsize/6, -20, axisWidth)
 
 	strokeWeight(0)
-        /*
-        text("Small",  -95,  1*plotsize/6+12);
-        text("Medium", -125, 3*plotsize/6+12);
-        text("Large",  -95,  5*plotsize/6+12);
-        */
-        text("Prefer\nimported", -125, 1*plotsize/6);
-        text("50/50",            -100, 3*plotsize/6+12);
-        text("Prefer\nlocal",    -100, 5*plotsize/6);
+        text("Prefer\nimported", -120, 1*plotsize/6);
+        text("50/50",            -95,  3*plotsize/6+12);
+        text("Prefer\nlocal",    -95,  5*plotsize/6);
 	pop();
 }
 
@@ -231,10 +223,12 @@ function update_simulation()
 
 function draw_simulation(x, y)
 {
-    xgap    = 70;
-    rect1_x = 115;
-    rect_y  = 142;
-    height = 200; //263;
+    var rect1_x = 70;
+    var xgap = 60;
+    var rect2_x = rect1_x + xgap;
+    var rect_width = 40;
+    var height = 170;
+    var rect_y = 142;
     var c_stroke;
 
     if( ( time > 0 ) && (time <= timemax) )
@@ -249,7 +243,7 @@ function draw_simulation(x, y)
                 c_stroke = color(0,204,255);
                 stroke(c_stroke);
                 fill(color('#79D5FB'));
-                rect(rect1_x,rect_y,50,-fa);
+                rect(rect1_x,rect_y,rect_width,-fa);
                 
                 noStroke();
                 fill(c_stroke);
@@ -260,7 +254,7 @@ function draw_simulation(x, y)
                 c_stroke = color(255,204,0);
                 stroke(c_stroke);
                 fill(color('#FFE788'));
-                rect(rect1_x+xgap,rect_y,50,-fb);
+                rect(rect1_x+xgap,rect_y,rect_width,-fb);
                 
                 noStroke();
                 fill(c_stroke);
@@ -275,7 +269,7 @@ function draw_tent(x,y)
 {
     push();
     translate(x,y);
-    scale(0.55)
+    scale(0.42)
     image(tent,0,0);
 
     if( time == timemax )
@@ -298,9 +292,9 @@ function draw_checkmark(x,y,fits)
 
 function draw()
 {
-    dx_axes = 190
+    dx_axes = 175
     dy_axes = 20
-    plotsize = 300
+    plotsize = 275
     background(240)
 
     push();
@@ -318,8 +312,8 @@ function draw()
     draw_axes(plotsize);
     pop();
 
-    tent_x = dx_axes + plotsize*1.35 - 30
-    tent_y = dy_axes + 20
+    tent_x = dx_axes - plotsize*0.35
+    tent_y = dy_axes + plotsize*1.60 + 3
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
@@ -342,7 +336,8 @@ function draw()
     if( which_rect >= 0 )
     {
         update_simulation()
-        draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)//tent_y+tent.height);
+        //draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)
+        draw_simulation(tent_x+0.05*tent.width, tent_y+0.15*tent.height+2)
     }
 
 }

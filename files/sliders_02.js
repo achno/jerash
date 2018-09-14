@@ -32,11 +32,11 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(620, 140);
+    pSlider1.position(150, 350);
 	pSlider1.style('width', '150px');
 
     pSlider2 = createSlider(0, timemax, 0.25*timemax);
-    pSlider2.position(620, 190);
+    pSlider2.position(150, 400);
 	pSlider2.style('width', '150px');
 
     // create button
@@ -45,7 +45,7 @@ function setup()
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(510,pSlider2.y+45);
+    button.position(pSlider2.x+22,pSlider2.y+45);
 
 }
 
@@ -94,12 +94,17 @@ function update_simulation()
 function draw_simulation(x, y)
 {
     var c_stroke;
+    var xbar1 = 70;
+    var xgap = 60;
+    var xbar2 = xbar1 + xgap;
+    var rect_width = 40;
+    var height = 170;
+
     if( ( time > 0 ) && (time <= timemax) )
     {
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 263;
 
             var fa = height*pA/timemax
             var fb = height*pB/timemax
@@ -109,7 +114,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#79D5FB'));
-		            rect(100,200,50,-fa);
+		            rect(xbar1,200,rect_width,-fa);
 		            percent_a = round(pA/(pA+pB)*100)
 				}
 				else
@@ -118,7 +123,7 @@ function draw_simulation(x, y)
 				}
 	            noStroke();
 	            fill(c_stroke);
-	            text(percent_a+"%", 100, 200-fa-7);
+	            text(percent_a+"%", xbar1, 200-fa-7);
             pop();
             push();
 	            c_stroke = color(255,204,0);
@@ -126,7 +131,7 @@ function draw_simulation(x, y)
 				{
 		            stroke(c_stroke);
 		            fill(color('#FFE788'));
-		            rect(200,200,50,-fb);
+		            rect(xbar2,200,rect_width,-fb);
 		            percent_b = round(pB/(pA+pB)*100)
 				}
 				else
@@ -135,7 +140,7 @@ function draw_simulation(x, y)
 				}		           
 	            noStroke();
 	            fill(c_stroke);
-	            text(percent_b+"%", 200, 200-fb-7);
+	            text(percent_b+"%", xbar2, 200-fb-7);
             pop();
         pop();
     }
@@ -145,7 +150,7 @@ function draw_tent(x,y)
 {
     push();
     translate(x,y);
-    scale(0.65)
+    scale(0.42)
     image(tent,0,0);
     pop();
 }
@@ -157,23 +162,23 @@ function draw()
     noStroke();
 
 	fill(50);
-    textFont(RobotoFont,30);
-    text("Change the preference between pots", 50, 45);
+    textFont(RobotoFont,24);
+    text("Change the preference between pots", 40, 45);
 
-    textFont(RobotoFont,25);
-    text("Buy local",    pSlider1.x-120, pSlider1.y+10);
+    textFont(RobotoFont,22);
+    text("Buy local",    pSlider1.x-110, pSlider1.y+10);
     text("Buy imported", pSlider1.x+155, pSlider1.y+10);
-	text("Small gap",    pSlider2.x-120, pSlider2.y+10);
+	text("Small gap",    pSlider2.x-110, pSlider2.y+10);
 	text("Big gap",      pSlider2.x+155, pSlider2.y+10);
 
-    tent_x = 5
+    tent_x = 70
     tent_y = 70
-
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
     update_simulation();
-    draw_simulation(tent_x+0.09*tent.width, tent_y+0.27*tent.height)//tent_y+tent.height);
+    //draw_simulation(tent_x+0.09*tent.width, tent_y+0.27*tent.height)
+    draw_simulation(tent_x+0.05*tent.width, tent_y+0.06*tent.height)
 
 
 }
