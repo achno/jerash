@@ -35,11 +35,11 @@ function setup()
     time = -1;
 
     // create sliders
-    xSliders = 730
-    ygap = 70
+    xSliders = 120
+    ygap = 60
 
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(xSliders, 50);
+    pSlider1.position(xSliders, 420);
     pSlider1.style('width', '100px');
 
     pSlider2 = createSlider(0, timemax, 0);
@@ -198,7 +198,7 @@ function draw_simulation(x, y)
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 160;
+            height = 90;
 
             var fa = 0.9*height*pA/n_pots //(pA+pB)
             var fb = 0.9*height*pB/n_pots //(pA+pB)
@@ -237,7 +237,7 @@ function draw_simulation(x, y)
 	            text(pB, 195, 200-fb-7);
             pop();
             
-            translate(300,0);
+            translate(0,142);
             var fa = height*pAtot/timemax
             var fb = height*pBtot/timemax
             push();
@@ -302,31 +302,32 @@ function draw()
 
     fill(50);
     textFont(RobotoFont,28);
-    text("Change the usage preference", 50, 45);
+    text("Change the usage preference", 40, 45);
 
     dx = 10
-    textFont(RobotoFont,22);
+    textFont(RobotoFont,20);
     text("Buy\nlocal",                   pSlider1.x-72-dx , pSlider1.y-2);
-    text("Buy\nimported",                pSlider1.x+112-dx, pSlider1.y-2);
+    text("Buy\nimported",                pSlider1.x+125-dx, pSlider1.y-2);
     text("Small\ngap",                   pSlider2.x-72-dx , pSlider2.y-2);
-    text("Big\ngap ",                    pSlider2.x+112-dx, pSlider2.y-2);
+    text("Big\ngap ",                    pSlider2.x+125-dx, pSlider2.y-2);
     text("Use\nlocal",                   pSlider3.x-72-dx , pSlider3.y-2);
-    text("Use\nimported",                pSlider3.x+112-dx, pSlider3.y-2);
+    text("Use\nimported",                pSlider3.x+125-dx, pSlider3.y-2);
     text("Initial\nnumber\nof local",    pSlider4.x-72-dx , pSlider4.y-12);
-    text("Initial\nnumber of\nimported", pSlider4.x+112-dx, pSlider4.y-12);
+    text("Initial\nnumber of\nimported", pSlider4.x+125-dx, pSlider4.y-12);
 
-    tent_x = 0
-    tent_y = 70
+    tent_x = 40
+    tent_y = -60
+	tent2_x = tent_x
+	tent2_y = tent_y + 340
 
+    textFont(RobotoFont,22);
     draw_tent(tent_x, tent_y+175)
-    text("Pots in houses", tent_x+60, tent_y+290);
-    draw_tent2(tent_x+315, tent_y+196.7)
-    text("Discarded broken pots", tent_x+330, tent_y+290);
-
-    //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
+    text("Pots in houses", tent_x+40, tent_y+290);
+	draw_tent2(tent2_x, tent2_y)
+    text("Discarded broken pots", tent2_x+40, tent2_y+90);
 
     update_simulation_two_step();
-    draw_simulation(tent_x-5, tent_y+40)//tent_y+tent.height);
+    draw_simulation(tent_x-5, tent_y+40)
 
 
 }

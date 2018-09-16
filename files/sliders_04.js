@@ -36,20 +36,21 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(685, 100);
-	pSlider1.style('width', '90px');
+    pSlider1.position(120, 420);
+	pSlider1.style('width', '100px');
 
 	pSlider3 = createSlider(1, 99, 50);
-    pSlider3.position(685, 150);
-	pSlider3.style('width', '90px');
+    pSlider3.position(pSlider1.x, pSlider1.y+70);
+	pSlider3.style('width', '100px');
 
     // create button
     var col = color(242,230,213,50);
+
     button = createButton('&#9658; PLAY');
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(pSlider3.x-110,pSlider3.y+40);
+    button.position(pSlider3.x-45,pSlider3.y+50);
 
 }
 
@@ -183,7 +184,7 @@ function draw_simulation(x, y)
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 180;
+            height = 90;
 
             var fa = 0.9*height*pA/n_pots //(pA+pB)
             var fb = 0.9*height*pB/n_pots //(pA+pB)
@@ -222,7 +223,7 @@ function draw_simulation(x, y)
 	            text(pB, 180, 200-fb-7);
             pop();
             
-            translate(300,0);
+            translate(0,142);
             var fa = height*pAtot/timemax
             var fb = height*pBtot/timemax
             push();
@@ -287,30 +288,30 @@ function draw()
 
 	fill(50);
     textFont(RobotoFont,28);
-    text("Change the usage preference", 50, 45);
+    text("Change the usage preference", 40, 45);
 
 	dx = 10
 
-    textFont(RobotoFont,25);
-	text("Buy local",    pSlider1.x-105-dx, pSlider1.y+10);
-	text("Buy imported", pSlider1.x+100-dx, pSlider1.y+10);
-	text("Use local",    pSlider3.x-105-dx, pSlider3.y+10);
-	text("Use imported", pSlider3.x+100-dx, pSlider3.y+10);
+    textFont(RobotoFont,20);
+    text("Buy\nlocal",     pSlider1.x-40-dx , pSlider1.y-2);
+    text("Buy\nimported",  pSlider1.x+125-dx, pSlider1.y-2);
+	text("Use\nlocal",     pSlider3.x-40-dx,  pSlider3.y-2);
+	text("Use\nimported",  pSlider3.x+125-dx, pSlider3.y-2);
 
+    tent_x = 40
+    tent_y = -60
+	tent2_x = tent_x
+	tent2_y = tent_y + 340
 
-    tent_x = 0
-    tent_y = 70
+    textFont(RobotoFont,22);
 
     draw_tent(tent_x, tent_y+175)
-    text("Pots in houses", tent_x+60, tent_y+290);
-    draw_tent2(tent_x+315, tent_y+196.7)
-    text("Discarded broken pots", tent_x+330, tent_y+290);
-
-
-    //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
+    text("Pots in houses", tent_x+40, tent_y+290);
+	draw_tent2(tent2_x, tent2_y)
+    text("Discarded broken pots", tent2_x+40, tent2_y+90);
 
     update_simulation_two_step();
-    draw_simulation(tent_x-5, tent_y+40)//tent_y+tent.height);
+    draw_simulation(tent_x-5, tent_y+40)
 
 
 }

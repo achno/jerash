@@ -36,12 +36,12 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(730, 75);
+    pSlider1.position(137, 490);
     pSlider1.style('width', '100px');
     preference = pSlider1.value();
 
     pSlider2 = createSlider(0, n_pots, n_pots/2);
-    pSlider2.position(730, 150);
+    pSlider2.position(pSlider1.x, pSlider1.y+70);
     pSlider2.style('width', '100px');
     init_con   = pSlider2.value();
 
@@ -191,7 +191,7 @@ function draw_simulation(x, y)
 	            text(pB, 175, 200-fb-7);
             pop();
             
-            translate(315,0);
+            translate(0,162);
             var fa = height*pAtot/timemax
             var fb = height*pBtot/timemax
             push();
@@ -258,29 +258,31 @@ function draw()
 
     fill(50);
     textFont(RobotoFont,28);
-    text("Change the usage preference", 50, 45);
+    text("Change the usage preference", 40, 45);
 
     dx = 10
 
     textFont(RobotoFont,20);
+    text("Buy\nlocal",                   pSlider1.x-67-dx , pSlider1.y-2);
+    text("Buy\nimported",                pSlider1.x+125-dx, pSlider1.y-2);
+    text("Initial\nnumber\nof local",    pSlider2.x-67-dx , pSlider2.y-12);
+    text("Initial\nnumber of\nimported", pSlider2.x+125-dx, pSlider2.y-12);
     
-    text("Buy\nlocal",                   pSlider1.x-72-dx , pSlider1.y-2);
-    text("Buy\nimported",                pSlider1.x+112-dx, pSlider1.y-2);
-    text("Initial\nnumber\nof local",    pSlider2.x-72-dx , pSlider2.y-12);
-    text("Initial\nnumber of\nimported", pSlider2.x+112-dx, pSlider2.y-12);
-    
-    tent_x = 0
-    tent_y = 70
+    tent_x = 40
+    tent_y = -10
+	tent2_x = tent_x
+	tent2_y = tent_y + 360
 
+    textFont(RobotoFont,22);
     draw_tent(tent_x, tent_y+175)
-    text("Pots in houses", tent_x+60, tent_y+290);
-    draw_tent2(tent_x+315, tent_y+196.7)
-    text("Discarded broken pots", tent_x+330, tent_y+290);
+    text("Pots in houses", tent_x+40, tent_y+290);
 
-    //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
+    //draw_tent2(tent_x+315, tent_y+196.7)
+	draw_tent2(tent2_x, tent2_y)
+    text("Discarded broken pots", tent2_x+40, tent2_y+90);
 
     //update_simulation();
-    draw_simulation(tent_x-5, tent_y+40)//tent_y+tent.height);
+    draw_simulation(tent_x-5, tent_y+40)
 
 
 }
