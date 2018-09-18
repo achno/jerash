@@ -6,7 +6,7 @@ Archaeologists aim to understand past societies. But it is a daunting task to re
 This is an explorable explanation to introduce archeologists to an approach that can help us untangle the complexities of past human behaviour: computational modelling. It allows us to focus on individual phenomena like trade, individual preference or political regulation. By simulating their theories about these things, archaeologists can identify what evidence they would find if their theory was true, and they can test hypotheses related to their theories by comparing simulated archaeology with real excavated archaeology.
 
 ## Want to know more? 
-- [The Danish-German Jerash Northwest Quarter Project]()http://projects.au.dk/internationaljerashexcavation/
+- [The Danish-German Jerash Northwest Quarter Project](http://projects.au.dk/internationaljerashexcavation/)
 - [Ceramics in Context Project](http://projects.au.dk/ceramics-in-context/)
 - [Project MERCURY](https://projectmercury.eu/about/)
 - [The Oxford Roman Economy Project](http://oxrep.classics.ox.ac.uk/)
