@@ -11,6 +11,7 @@ function preload()
 {
     CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
     RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+    RobotoBold    = loadFont('fonts/Roboto-Bold.ttf')
 }
 
 function setup()
@@ -36,7 +37,7 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(120, 420);
+    pSlider1.position(135, 420);
 	pSlider1.style('width', '100px');
 
 	pSlider3 = createSlider(1, 99, 50);
@@ -293,10 +294,30 @@ function draw()
 	dx = 10
 
     textFont(RobotoFont,20);
-    text("Buy\nlocal",     pSlider1.x-40-dx , pSlider1.y-2);
-    text("Buy\nimported",  pSlider1.x+125-dx, pSlider1.y-2);
-	text("Use\nlocal",     pSlider3.x-40-dx,  pSlider3.y-2);
-	text("Use\nimported",  pSlider3.x+125-dx, pSlider3.y-2);
+    //text("Buy\nlocal",     pSlider1.x-50-dx , pSlider1.y-2);
+    //text("Buy\nimported",  pSlider1.x+120-dx, pSlider1.y-2);
+	//text("Use\nlocal",     pSlider3.x-50-dx,  pSlider3.y-2);
+	//text("Use\nimported",  pSlider3.x+120-dx, pSlider3.y-2);
+
+    text("Buy\n ", pSlider1.x-55-dx , pSlider1.y-2);
+    text("Buy\n ", pSlider1.x+115-dx, pSlider1.y-2);
+    text("Buy\n",  pSlider3.x-55-dx , pSlider3.y-2);
+    text("Buy\n",  pSlider3.x+115-dx, pSlider3.y-2);
+
+    push();
+    noStroke();
+    textFont(RobotoBold,23);
+    //c_stroke = color(0,204,255);
+    c_stroke = color(0,189,237);
+    fill(c_stroke);
+    text(" \nlocal",  pSlider1.x-55-dx , pSlider1.y-5);
+    text(" \nlocal",  pSlider3.x-55-dx , pSlider3.y-7);
+    //c_stroke = color(255,204,0);
+    c_stroke = color(237,189,0);
+    fill(c_stroke)
+    text(" \nimported", pSlider1.x+115-dx, pSlider1.y-5);
+    text(" \nimported", pSlider3.x+115-dx, pSlider3.y-7);
+    pop();
 
     tent_x = 40
     tent_y = -60

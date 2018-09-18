@@ -28,6 +28,7 @@ function preload()
 {
     CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
     RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+    RobotoBold    = loadFont('fonts/Roboto-Bold.ttf')
 }
 
 function setup()
@@ -173,9 +174,28 @@ function draw_axes(plotsize)
 	rect(2, 5*plotsize/6, -20, axisWidth)
 
 	strokeWeight(0)
-        text("Prefer\nimported", -120, 1*plotsize/6);
-        text("50/50",            -95,  3*plotsize/6+12);
-        text("Prefer\nlocal",    -95,  5*plotsize/6);
+    text("50/50",            -95,  3*plotsize/6+12);
+    //text("Prefer\nimported", -120, 1*plotsize/6);
+    //text("Prefer\nlocal",    -95,  5*plotsize/6);
+
+    text("Prefer\n", -120, 1*plotsize/6);
+    text("Prefer\n",  -95, 5*plotsize/6);
+
+    push();
+    noStroke();
+    textFont(RobotoBold,23);
+    //c_stroke = color(0,204,255);
+    c_stroke = color(0,189,237);
+    fill(c_stroke);
+    text(" \nlocal", -95, 5*plotsize/6 - 5);
+    //c_stroke = color(255,204,0);
+    c_stroke = color(237,189,0);
+    fill(c_stroke)
+    text(" \nimported", -120, 1*plotsize/6 - 5);
+    pop();
+
+
+
 	pop();
 }
 

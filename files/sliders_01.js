@@ -12,6 +12,7 @@ function preload()
 {
     CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
     RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+    RobotoBold    = loadFont('fonts/Roboto-Bold.ttf')
 }
 
 function setup()
@@ -145,8 +146,23 @@ function draw()
 
 	fill(50);
     textFont(RobotoFont,24);
-	text("Buy local",    pSlider1.x-110 , pSlider1.y+10);
-	text("Buy imported", pSlider1.x+155,  pSlider1.y+10);
+	//text("Buy local",    pSlider1.x-110 , pSlider1.y+10);
+    //text("Buy imported", pSlider1.x+155,  pSlider1.y+10);
+    text("Buy ", pSlider1.x-110 , pSlider1.y+10);
+	text("Buy ", pSlider1.x+155,  pSlider1.y+10);
+
+    push();
+    noStroke()
+    textFont(RobotoBold,25);
+    //c_stroke = color(0,204,255);
+    c_stroke = color(0,189,237);
+    fill(c_stroke);
+    text("local",    pSlider1.x-65 , pSlider1.y+11);
+    //c_stroke = color(255,204,0);
+    c_stroke = color(237,189,0);
+    fill(c_stroke)
+    text("imported", pSlider1.x+200,  pSlider1.y+11);
+    pop();
 
     tent_x = 70
     tent_y = 70

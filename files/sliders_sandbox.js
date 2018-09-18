@@ -11,6 +11,7 @@ function preload()
 {
     CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
     RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+    RobotoBold    = loadFont('fonts/Roboto-Bold.ttf')
 }
 
 function setup()
@@ -51,7 +52,7 @@ function setup()
     pSlider3.style('width', '100px');
 
     pSlider4 = createSlider(0, n_pots, n_pots/2);
-    pSlider4.position(xSliders, pSlider3.y+ygap  );
+    pSlider4.position(xSliders, pSlider3.y+ygap+10  );
     pSlider4.style('width', '100px');
 
     // create button
@@ -306,6 +307,7 @@ function draw()
 
     dx = 10
     textFont(RobotoFont,20);
+    /*
     text("Buy\nlocal",                   pSlider1.x-72-dx , pSlider1.y-2);
     text("Buy\nimported",                pSlider1.x+125-dx, pSlider1.y-2);
     text("Small\ngap",                   pSlider2.x-72-dx , pSlider2.y-2);
@@ -314,6 +316,32 @@ function draw()
     text("Use\nimported",                pSlider3.x+125-dx, pSlider3.y-2);
     text("Initial\nnumber\nof local",    pSlider4.x-72-dx , pSlider4.y-12);
     text("Initial\nnumber of\nimported", pSlider4.x+125-dx, pSlider4.y-12);
+    */
+    text("Buy\n",      pSlider1.x-72-dx , pSlider1.y-2);
+    text("Buy\n",      pSlider1.x+125-dx, pSlider1.y-2);
+    text("Small\ngap", pSlider2.x-72-dx , pSlider2.y-2);
+    text("Big\ngap ",  pSlider2.x+125-dx, pSlider2.y-2);
+    text("Use\n",      pSlider3.x-72-dx , pSlider3.y-2);
+    text("Use\n",      pSlider3.x+125-dx, pSlider3.y-2);
+    text("Initial\nnumber\nof ",  pSlider4.x-72-dx , pSlider4.y-12);
+    text("Initial\nnumber of\n",  pSlider4.x+125-dx, pSlider4.y-12);
+
+    push();
+    noStroke();
+    textFont(RobotoBold,23);
+    //c_stroke = color(0,204,255);
+    c_stroke = color(0,189,237);
+    fill(c_stroke);
+    text(" \nlocal",  pSlider1.x-72-dx , pSlider1.y-6);
+    text(" \nlocal",  pSlider3.x-72-dx , pSlider3.y-6);
+    text(" \n \n    local",  pSlider4.x-72-dx , pSlider4.y-20);
+    //c_stroke = color(255,204,0);
+    c_stroke = color(237,189,0);
+    fill(c_stroke)
+    text(" \nimported",    pSlider1.x+125-dx, pSlider1.y-6);
+    text(" \nimported",    pSlider3.x+125-dx, pSlider3.y-6);
+    text(" \n \nimported", pSlider4.x+125-dx, pSlider4.y-20);
+    pop();
 
     tent_x = 40
     tent_y = -60

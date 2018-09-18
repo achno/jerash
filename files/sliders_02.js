@@ -11,6 +11,7 @@ function preload()
 {
     CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
     RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
+    RobotoBold    = loadFont('fonts/Roboto-Bold.ttf')
 }
 
 function setup()
@@ -166,10 +167,26 @@ function draw()
     text("Change the preference between pots", 40, 45);
 
     textFont(RobotoFont,22);
-    text("Buy local",    pSlider1.x-110, pSlider1.y+10);
-    text("Buy imported", pSlider1.x+155, pSlider1.y+10);
 	text("Small gap",    pSlider2.x-110, pSlider2.y+10);
 	text("Big gap",      pSlider2.x+155, pSlider2.y+10);
+
+    //text("Buy local",    pSlider1.x-110, pSlider1.y+10);
+    //text("Buy imported", pSlider1.x+155, pSlider1.y+10);
+    text("Buy ", pSlider1.x-110 , pSlider1.y+10);
+    text("Buy ", pSlider1.x+155,  pSlider1.y+10);
+
+    push();
+    noStroke();
+    textFont(RobotoBold,23);
+    //c_stroke = color(0,204,255);
+    c_stroke = color(0,189,237);
+    fill(c_stroke);
+    text("local",    pSlider1.x-68 , pSlider1.y+11);
+    //c_stroke = color(255,204,0);
+    c_stroke = color(237,189,0);
+    fill(c_stroke)
+    text("imported", pSlider1.x+195,  pSlider1.y+11);
+    pop();
 
     tent_x = 70
     tent_y = 70

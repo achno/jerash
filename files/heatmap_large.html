@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8"/>
-<svg width="605" height="450" stroke="#fff" stroke-width="0.5"></svg>
+<svg width="500" height="400" stroke="#fff" stroke-width="0.5"></svg>
 
 <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <script src="https://d3js.org/d3-contour.v1.min.js" charset="utf-8"></script>
@@ -10,7 +10,7 @@
 <!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.js" charset="utf-8"></script>
---!>
+-->
 
 <script language="javascript" type="text/javascript" src="p5.js"></script>
 <script language="javascript" src="p5.dom.js"></script>
@@ -38,8 +38,10 @@ function ABratio(p, gap)
 
 d3.select("body").style("background-color", d3.rgb(240,240,240))
 
+contourplotsize = 320
+
 var svg = d3.select("svg"),
-    width  = 400;
+    width  = contourplotsize;
     height = width 
 
 var thresholds = d3.range(0,3.6,0.4)
@@ -114,13 +116,13 @@ for (var i=0; i<thresholds.length; i++)
         .attr("x", marginx+65+width)
         .attr("y", marginy+46+i*blockheight)
         .style("font-family", "sans-serif")
-        .style("font-size", "22px")
+        .style("font-size", "20px")
         .style("font-weight", "bold")
         .text(cbar_labels[i])
 }
 
-text_data = 'Data is in this range  \u25b6'
 /*
+text_data = 'Data is in this range  \u25b6'
 if( which_slice == -1 )
 {
     svg.append('rect')
@@ -157,7 +159,7 @@ svg.append("svg:defs").append("svg:marker")
 
 var line = svg.append("line")
     .attr("x1",0+marginx)
-    .attr("y1",400+marginy)
+    .attr("y1",contourplotsize+marginy)
     .attr("x2",0+marginx)
     .attr("y2",0+marginy)
     .attr("stroke","black")
@@ -177,16 +179,16 @@ svg.append('text')
 
 var line = svg.append("line")
     .attr("x1",0+marginx)
-    .attr("y1",400+marginy)
-    .attr("x2",400+marginx)
-    .attr("y2",400+marginy)
+    .attr("y1",contourplotsize+marginy)
+    .attr("x2",contourplotsize+marginx)
+    .attr("y2",contourplotsize+marginy)
     .attr("stroke","black")
     .attr("stroke-width",6)
     .attr("marker-end","url(#tri)");
 
 svg.append('text')
-    .attr("x", 80+marginx)
-    .attr("y", 430+marginy)
+    .attr("x", 40+marginx)
+    .attr("y", contourplotsize+30+marginy)
     .style("font-family", "sans-serif")
     .style("font-size", "25px")
     .style("font-weight", "bold")
@@ -225,13 +227,13 @@ function preload()
 {
     CondensedFont = loadFont('fonts/EncodeSansCondensed-ExtraBold.ttf')
     RobotoFont    = loadFont('fonts/Roboto-Regular.ttf')
-    //RobotoFont    = loadFont('fonts/Roboto-Bold.ttf')
+    RobotoBold    = loadFont('fonts/Roboto-Bold.ttf')
 }
 
 function setup()
 {
     // create canvas
-    createCanvas(400,400);
+    createCanvas(400,280);
     textFont("sans",25);
 
     // Tent part
@@ -253,7 +255,7 @@ function draw_tent(x,y)
 {
     push();
     translate(x,y);
-    scale(0.50)
+    scale(0.42)
     image(tent,0,0);
 
     if( time == timemax )
@@ -265,10 +267,10 @@ function draw_tent(x,y)
 function draw_checkmark(x,y,fits)
 {
     mark_x = tent.width-75
-    mark_y = - 55
+    mark_y = -55
     mark_size = 120
     if( fits == 1 )
-        image(mark_yes, mark_x, mark_y, mark_size, mark_size);
+        image(mark_yes, mark_x, mark_y+5, mark_size, mark_size);
     else 
         image(mark_no, mark_x, mark_y, mark_size, mark_size);
 }
@@ -306,10 +308,11 @@ function update_simulation()
 
 function draw_simulation(x, y)
 {
-    xgap    = 70;
+    xgap    = 60;
     rect1_x = 115;
     rect_y  = 142;
-    height = 200; //263;
+    height = 170;
+    var rect_width = 40;
     var c_stroke;
 
     if( ( time > 0 ) && (time <= timemax) )
@@ -324,7 +327,7 @@ function draw_simulation(x, y)
                 c_stroke = color(0,204,255);
                 stroke(c_stroke);
                 fill(color('#79D5FB'));
-                rect(rect1_x,rect_y,50,-fa);
+                rect(rect1_x,rect_y,rect_width,-fa);
                 
                 noStroke();
                 fill(c_stroke);
@@ -336,7 +339,7 @@ function draw_simulation(x, y)
                 c_stroke = color(255,204,0);
                 stroke(c_stroke);
                 fill(color('#FFE788'));
-                rect(rect1_x+xgap,rect_y,50,-fb);
+                rect(rect1_x+xgap,rect_y,rect_width,-fb);
                 
                 noStroke();
                 fill(c_stroke);
@@ -364,9 +367,9 @@ function draw()
 {
     translate(0,-10);
 
-    dx_axes = 0
-    dy_axes = 50
-    plotsize = 300
+    dx_axes = 40
+    dy_axes = 30
+    plotsize = 275
     background(240)
 
     tent_x = dx_axes //+ plotsize*1.35
@@ -388,6 +391,7 @@ function draw()
         }
     }
 
+    /*
     push();
     fill(color('#276419'));
     textFont("sans",25)
@@ -399,13 +403,15 @@ function draw()
     text('Data is in this range', dx_axes+25, dy_axes-22)
     //text('Data is in the >99.8% range', dx_axes+25, dy_axes-22)
     pop()
+    */
 
     //.range(['#8e0152','#c51b7d','#de77ae','#f1b6da','#fde0ef','#e6f5d0','#b8e186','#7fbc41','#4d9221','#276419'])
 
     if( which_slice >= 0 )
     {
         update_simulation()
-        draw_simulation(tent_x+0.02*tent.width, tent_y+0.23*tent.height)
+        //draw_simulation(tent_x+0.02*tent.width, tent_y+0.23*tent.height)
+        draw_simulation(tent_x-0.01*tent.width, tent_y+0.15*tent.height+2)
     }
 
 }
