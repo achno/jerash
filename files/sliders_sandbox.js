@@ -36,11 +36,12 @@ function setup()
     time = -1;
 
     // create sliders
-    xSliders = 120
+    xSliders = 465
     ygap = 60
 
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(xSliders, 420);
+    //pSlider1.position(xSliders, 420);
+    pSlider1.position(xSliders,45);
     pSlider1.style('width', '100px');
 
     pSlider2 = createSlider(0, timemax, 0);
@@ -297,13 +298,14 @@ function draw_tent2(x,y)
 }
 function draw()
 {
+    translate(0,-70)
     //background(125);
     background(240);
     noStroke();
 
     fill(50);
     textFont(RobotoFont,28);
-    text("Change the usage preference", 40, 45);
+    //text("Change the usage preference", 40, 45);
 
     dx = 10
     textFont(RobotoFont,20);
@@ -317,6 +319,8 @@ function draw()
     text("Initial\nnumber\nof local",    pSlider4.x-72-dx , pSlider4.y-12);
     text("Initial\nnumber of\nimported", pSlider4.x+125-dx, pSlider4.y-12);
     */
+    push();
+    translate(0,70);
     text("Buy\n",      pSlider1.x-72-dx , pSlider1.y-2);
     text("Buy\n",      pSlider1.x+125-dx, pSlider1.y-2);
     text("Small\ngap", pSlider2.x-72-dx , pSlider2.y-2);
@@ -325,9 +329,11 @@ function draw()
     text("Use\n",      pSlider3.x+125-dx, pSlider3.y-2);
     text("Initial\nnumber\nof ",  pSlider4.x-72-dx , pSlider4.y-12);
     text("Initial\nnumber of\n",  pSlider4.x+125-dx, pSlider4.y-12);
+    pop();
 
     push();
     noStroke();
+    translate(0,70);
     textFont(RobotoBold,23);
     //c_stroke = color(0,204,255);
     c_stroke = color(0,189,237);
