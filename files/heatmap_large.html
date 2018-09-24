@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8"/>
-<svg width="500" height="400" stroke="#fff" stroke-width="0.5"></svg>
+<svg width="410" height="320" stroke="#fff" stroke-width="0.5"></svg>
 
 <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <script src="https://d3js.org/d3-contour.v1.min.js" charset="utf-8"></script>
@@ -38,7 +38,7 @@ function ABratio(p, gap)
 
 d3.select("body").style("background-color", d3.rgb(240,240,240))
 
-contourplotsize = 320
+contourplotsize = 250
 
 var svg = d3.select("svg"),
     width  = contourplotsize;
@@ -101,22 +101,21 @@ for( var i=0; i<slices.length; i++) {
 
 var blockheight = (height-40)/thresholds.length
 
-//cbar_labels = ['>99.9%','99.8-99.9%*','99.6-99.8%','99.2-99.6%','98-99.2%','95-98%','87-95%','68-87%','20-68%','<20%']
 cbar_labels = ['>99.8%','>99.6%','>99.2%','>98%','>95%','>87%','>68%','>20%','<20%']
 //	cbar_labels[0] += '\u25c4 Data is in\nthis range'
 
 for (var i=0; i<thresholds.length; i++)
 {
     svg.append('rect')
-       .attrs({ x:width+27+marginx, y:20+marginy+i*blockheight, width:30, height:blockheight,
+       .attrs({ x:width+27+marginx, y:20+marginy+i*blockheight, width:20, height:blockheight,
                 fill:colour(thresholds[thresholds.length-1-i]) })
     .attr("stroke-width",0);
 
     svg.append('text')
-        .attr("x", marginx+65+width)
-        .attr("y", marginy+46+i*blockheight)
+        .attr("x", marginx+55+width)
+        .attr("y", marginy+40+i*blockheight)
         .style("font-family", "sans-serif")
-        .style("font-size", "20px")
+        .style("font-size", "18px")
         .style("font-weight", "bold")
         .text(cbar_labels[i])
 }
@@ -169,7 +168,7 @@ var line = svg.append("line")
 text_x = 220 - marginy
 text_y = 230 + marginx 
 svg.append('text')
-    .attr("x", 0+marginx)
+    .attr("x", 60+marginx)
     .attr("y", 200+marginy)
     .style("font-family", "sans-serif")
     .style("font-size", "25px")
@@ -187,7 +186,7 @@ var line = svg.append("line")
     .attr("marker-end","url(#tri)");
 
 svg.append('text')
-    .attr("x", 40+marginx)
+    .attr("x", 5+marginx)
     .attr("y", contourplotsize+30+marginy)
     .style("font-family", "sans-serif")
     .style("font-size", "25px")
@@ -233,7 +232,7 @@ function preload()
 function setup()
 {
     // create canvas
-    createCanvas(400,280);
+    createCanvas(300,320);
     textFont("sans",25);
 
     // Tent part
@@ -255,7 +254,7 @@ function draw_tent(x,y)
 {
     push();
     translate(x,y);
-    scale(0.42)
+    scale(0.32)
     image(tent,0,0);
 
     if( time == timemax )
@@ -308,16 +307,17 @@ function update_simulation()
 
 function draw_simulation(x, y)
 {
-    xgap    = 60;
+    xgap    = 48;
     rect1_x = 115;
     rect_y  = 142;
-    height = 170;
+    height = 128;
     var rect_width = 40;
     var c_stroke;
 
     if( ( time > 0 ) && (time <= timemax) )
     {
         push();
+            textFont(RobotoFont,24);
             strokeWeight(4);
             translate(x,y);
 
@@ -365,11 +365,10 @@ function change_rect(which_slice)
 
 function draw()
 {
-    translate(0,-10);
+    translate(0,80);
 
-    dx_axes = 40
-    dy_axes = 30
-    plotsize = 275
+    dx_axes = 20
+    dy_axes = -10
     background(240)
 
     tent_x = dx_axes //+ plotsize*1.35
@@ -410,8 +409,7 @@ function draw()
     if( which_slice >= 0 )
     {
         update_simulation()
-        //draw_simulation(tent_x+0.02*tent.width, tent_y+0.23*tent.height)
-        draw_simulation(tent_x-0.01*tent.width, tent_y+0.15*tent.height+2)
+        draw_simulation(tent_x-0.05*tent.width, tent_y+0.06*tent.height+1)
     }
 
 }

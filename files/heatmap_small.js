@@ -362,7 +362,6 @@ function draw()
     if( which_rect >= 0 )
     {
         update_simulation()
-        //draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)
         draw_simulation(tent_x+0.01*tent.width, tent_y+0.06*tent.height+1)
     }
 
