@@ -129,13 +129,13 @@ function write_rectangles(which_rect,plotsize)
 
     if( data[which_rect] > 0 )
     {
-        textFont(CondensedFont,22);
-        epx = 0.2
+        textFont(CondensedFont,19);
+        epx = 0.17
         epy = 0.42
     }
     else
     {
-        textFont(CondensedFont,20);
+        textFont(CondensedFont,15);
         epx = 0.065
         epy = 0.43
     }
@@ -244,16 +244,17 @@ function update_simulation()
 function draw_simulation(x, y)
 {
     var rect1_x = 70;
-    var xgap = 60;
+    var xgap = 48;
     var rect2_x = rect1_x + xgap;
-    var rect_width = 40;
-    var height = 170;
+    var rect_width = 35;
+    var height = 128;
     var rect_y = 142;
     var c_stroke;
 
     if( ( time > 0 ) && (time <= timemax) )
     {
         push();
+            textFont(RobotoFont,24);
             strokeWeight(4);
             translate(x,y);
 
@@ -268,7 +269,7 @@ function draw_simulation(x, y)
                 noStroke();
                 fill(c_stroke);
                 percent_a = round(pA/(pA+pB)*100)
-                text(percent_a+"%", rect1_x, rect_y-fa-7);
+                text(percent_a+"%", -2+rect1_x, rect_y-fa-7);
             pop();
             push();
                 c_stroke = color(255,204,0);
@@ -279,7 +280,7 @@ function draw_simulation(x, y)
                 noStroke();
                 fill(c_stroke);
                 percent_b = round(pB/(pA+pB)*100)
-                text(percent_b+"%", rect1_x+xgap,rect_y-fb-7);
+                text(percent_b+"%", -2+rect1_x+xgap,rect_y-fb-7);
             pop();
         pop();
     }
@@ -289,7 +290,7 @@ function draw_tent(x,y)
 {
     push();
     translate(x,y);
-    scale(0.42)
+    scale(0.32)
     image(tent,0,0);
 
     if( time == timemax )
@@ -312,9 +313,10 @@ function draw_checkmark(x,y,fits)
 
 function draw()
 {
+    //print(windowWidth-20, windowHeight-20)
     dx_axes = 175
     dy_axes = 20
-    plotsize = 275
+    plotsize = 210
     background(240)
 
     push();
@@ -332,8 +334,12 @@ function draw()
     draw_axes(plotsize);
     pop();
 
-    tent_x = dx_axes - plotsize*0.35
-    tent_y = dy_axes + plotsize*1.60 + 3
+    //tent_x = dx_axes - plotsize*0.35
+    //tent_y = dy_axes + plotsize*1.60 + 3
+
+    tent_x = dx_axes + plotsize*1.20
+    tent_y = dy_axes + plotsize*0.15
+
     draw_tent(tent_x, tent_y)
     //image(peep, tent_x+0.15*tent.width, tent.height, peep.width/2, peep.height/2)
 
@@ -357,7 +363,7 @@ function draw()
     {
         update_simulation()
         //draw_simulation(tent_x+0.05*tent.width, tent_y+0.28*tent.height)
-        draw_simulation(tent_x+0.05*tent.width, tent_y+0.15*tent.height+2)
+        draw_simulation(tent_x+0.01*tent.width, tent_y+0.06*tent.height+1)
     }
 
 }
