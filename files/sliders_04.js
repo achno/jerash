@@ -37,7 +37,8 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(135, 420);
+    //pSlider1.position(135, 420);
+    pSlider1.position(465,100);
 	pSlider1.style('width', '100px');
 
 	pSlider3 = createSlider(1, 99, 50);
@@ -51,7 +52,7 @@ function setup()
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(pSlider3.x-45,pSlider3.y+50);
+    button.position(pSlider3.x-55,pSlider3.y+50);
 
 }
 
@@ -283,13 +284,14 @@ function draw_tent2(x,y)
 }
 function draw()
 {
+    translate(0,-70)
     //background(125);
 	background(240);
     noStroke();
 
 	fill(50);
     textFont(RobotoFont,28);
-    text("Change the usage preference", 40, 45);
+    //text("Change the usage preference", 40, 45);
 
 	dx = 10
 
@@ -299,12 +301,16 @@ function draw()
 	//text("Use\nlocal",     pSlider3.x-50-dx,  pSlider3.y-2);
 	//text("Use\nimported",  pSlider3.x+120-dx, pSlider3.y-2);
 
+    push();
+    translate(0,70);
     text("Buy\n ", pSlider1.x-55-dx , pSlider1.y-2);
     text("Buy\n ", pSlider1.x+115-dx, pSlider1.y-2);
     text("Buy\n",  pSlider3.x-55-dx , pSlider3.y-2);
     text("Buy\n",  pSlider3.x+115-dx, pSlider3.y-2);
+    pop();
 
     push();
+    translate(0,70);    
     noStroke();
     textFont(RobotoBold,23);
     //c_stroke = color(0,204,255);
