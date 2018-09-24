@@ -37,7 +37,8 @@ function setup()
 
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
-    pSlider1.position(140, 490);
+    //pSlider1.position(140, 490);
+    pSlider1.position(475, 50);
     pSlider1.style('width', '100px');
     preference = pSlider1.value();
 
@@ -153,7 +154,7 @@ function draw_simulation(x, y)
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 160;
+            height = 110;
 
             var fa = 0.9*height*pA/n_pots //(pA+pB)
             var fb = 0.9*height*pB/n_pots //(pA+pB)
@@ -253,16 +254,19 @@ function draw_tent2(x,y)
 
 function draw()
 {
+    translate(-15,-100)
     //background(125);
     background(240);
     noStroke();
 
     fill(50);
     textFont(RobotoFont,28);
-    text("Change the usage preference", 40, 45);
+    //text("Change the usage preference", 40, 65);
 
     dx = 10
 
+    push();
+    translate(0,100)
     textFont(RobotoFont,20);
     //text("Buy\nlocal",                   pSlider1.x-70-dx , pSlider1.y-2);
     //text("Buy\nimported",                pSlider1.x+125-dx, pSlider1.y-2);
@@ -273,14 +277,16 @@ function draw()
     text("Buy\n ",                pSlider1.x+120-dx, pSlider1.y-2);
     text("Initial\nnumber\nof",   pSlider2.x-75-dx , pSlider2.y-12);
     text("Initial\nnumber of\n",  pSlider2.x+120-dx, pSlider2.y-12);
+    pop();
 
     push();
+    translate(0,100)
     noStroke();
     textFont(RobotoBold,23);
     //c_stroke = color(0,204,255);
     c_stroke = color(0,189,237);
     fill(c_stroke);
-    text(" \nlocal",    pSlider1.x-75-dx , pSlider1.y-5);
+    text(" \nlocal",          pSlider1.x-75-dx , pSlider1.y-5);
     text(" \n \n    local",   pSlider2.x-75-dx , pSlider2.y-20);
     //c_stroke = color(255,204,0);
     c_stroke = color(237,189,0);
