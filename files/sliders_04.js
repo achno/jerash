@@ -186,7 +186,7 @@ function draw_simulation(x, y)
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 90;
+            height = 65;
 
             var fa = 0.9*height*pA/n_pots //(pA+pB)
             var fb = 0.9*height*pB/n_pots //(pA+pB)
@@ -305,8 +305,8 @@ function draw()
     translate(0,70);
     text("Buy\n ", pSlider1.x-55-dx , pSlider1.y-2);
     text("Buy\n ", pSlider1.x+115-dx, pSlider1.y-2);
-    text("Use\n",  pSlider3.x-55-dx , pSlider3.y-2);
-    text("Use\n",  pSlider3.x+115-dx, pSlider3.y-2);
+    text("Break\n",  pSlider3.x-55-dx , pSlider3.y-2);
+    text("Break\n",  pSlider3.x+115-dx, pSlider3.y-2);
     pop();
 
     push();

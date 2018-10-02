@@ -325,8 +325,8 @@ function draw()
     text("Buy\n",      pSlider1.x+125-dx, pSlider1.y-2);
     text("Small\ngap", pSlider2.x-72-dx , pSlider2.y-2);
     text("Big\ngap ",  pSlider2.x+125-dx, pSlider2.y-2);
-    text("Use\n",      pSlider3.x-72-dx , pSlider3.y-2);
-    text("Use\n",      pSlider3.x+125-dx, pSlider3.y-2);
+    text("Break\n",      pSlider3.x-72-dx , pSlider3.y-2);
+    text("Break\n",      pSlider3.x+125-dx, pSlider3.y-2);
     text("Initial\nnumber\nof ",  pSlider4.x-72-dx , pSlider4.y-12);
     text("Initial\nnumber of\n",  pSlider4.x+125-dx, pSlider4.y-12);
     pop();

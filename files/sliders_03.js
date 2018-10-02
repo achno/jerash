@@ -38,7 +38,7 @@ function setup()
     // create sliders
     pSlider1 = createSlider(0, 100, 50);
     //pSlider1.position(140, 490);
-    pSlider1.position(475, 50);
+    pSlider1.position(450, 50);
     pSlider1.style('width', '100px');
     preference = pSlider1.value();
 
@@ -53,13 +53,13 @@ function setup()
     var gapsize = 45;
     var initgap = 23;
 
-    buttonA = createButton('USE LOCAL');
+    buttonA = createButton('BREAK LOCAL');
     buttonA.style('background-color',col)
     buttonA.style('font-size','25px');
     buttonA.mousePressed(useA);
     buttonA.position(pSlider2.x-75,pSlider2.y+gapsize+initgap);
 
-    buttonB = createButton('USE IMPORTED');
+    buttonB = createButton('BREAK IMPORTED');
     buttonB.style('background-color',col)
     buttonB.style('font-size','25px');
     buttonB.mousePressed(useB);
@@ -273,10 +273,10 @@ function draw()
     //text("Initial\nnumber\nof local",    pSlider2.x-75-dx , pSlider2.y-12);
     //text("Initial\nnumber of\nimported", pSlider2.x+120-dx, pSlider2.y-12);
 
-    text("Buy\n ",                pSlider1.x-75-dx , pSlider1.y-2);
-    text("Buy\n ",                pSlider1.x+120-dx, pSlider1.y-2);
-    text("Initial\nnumber\nof",   pSlider2.x-75-dx , pSlider2.y-12);
-    text("Initial\nnumber of\n",  pSlider2.x+120-dx, pSlider2.y-12);
+    text("Buy\n ",                pSlider1.x-55-dx , pSlider1.y-2);
+    text("Buy\n ",                pSlider1.x+130-dx, pSlider1.y-2);
+    text("Initial\nnumber\nof",   pSlider2.x-55-dx , pSlider2.y-12);
+    text("Initial\nnumber of\n",  pSlider2.x+130-dx, pSlider2.y-12);
     pop();
 
     push();
@@ -286,13 +286,13 @@ function draw()
     //c_stroke = color(0,204,255);
     c_stroke = color(0,189,237);
     fill(c_stroke);
-    text(" \nlocal",          pSlider1.x-75-dx , pSlider1.y-5);
-    text(" \n \n    local",   pSlider2.x-75-dx , pSlider2.y-20);
+    text(" \nlocal",          pSlider1.x-55-dx , pSlider1.y-5);
+    text(" \n \n    local",   pSlider2.x-55-dx , pSlider2.y-20);
     //c_stroke = color(255,204,0);
     c_stroke = color(237,189,0);
     fill(c_stroke)
-    text(" \nimported",     pSlider1.x+120-dx, pSlider1.y-5);
-    text(" \n \nimported",  pSlider2.x+120-dx, pSlider2.y-20);
+    text(" \nimported",     pSlider1.x+130-dx, pSlider1.y-5);
+    text(" \n \nimported",  pSlider2.x+130-dx, pSlider2.y-20);
     pop();
 
     
