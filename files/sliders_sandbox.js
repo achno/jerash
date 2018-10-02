@@ -200,7 +200,7 @@ function draw_simulation(x, y)
         push();
             strokeWeight(4);
             translate(x,y);
-            height = 90;
+            height = 65;
 
             var fa = 0.9*height*pA/n_pots //(pA+pB)
             var fb = 0.9*height*pB/n_pots //(pA+pB)
