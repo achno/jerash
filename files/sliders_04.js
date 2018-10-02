@@ -305,8 +305,8 @@ function draw()
     translate(0,70);
     text("Buy\n ", pSlider1.x-55-dx , pSlider1.y-2);
     text("Buy\n ", pSlider1.x+115-dx, pSlider1.y-2);
-    text("Buy\n",  pSlider3.x-55-dx , pSlider3.y-2);
-    text("Buy\n",  pSlider3.x+115-dx, pSlider3.y-2);
+    text("Use\n",  pSlider3.x-55-dx , pSlider3.y-2);
+    text("Use\n",  pSlider3.x+115-dx, pSlider3.y-2);
     pop();
 
     push();
