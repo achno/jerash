@@ -37,11 +37,16 @@ function setup()
 
     // create sliders
     xSliders = 465
+    y0   = 35
     ygap = 60
+
+    pSlider0 = createSlider(0, 100, 50);
+    pSlider0.position(xSliders,y0);
+    pSlider0.style('width', '100px');
 
     pSlider1 = createSlider(0, 100, 50);
     //pSlider1.position(xSliders, 420);
-    pSlider1.position(xSliders,45);
+    pSlider1.position(xSliders,pSlider0.y+ygap);
     pSlider1.style('width', '100px');
 
     pSlider2 = createSlider(0, timemax, 0);
@@ -62,17 +67,18 @@ function setup()
     button.style('background-color',col)
     button.style('font-size','25px');
     button.mousePressed(run_simulation);
-    button.position(pSlider4.x-80,pSlider4.y+70);
+    button.position(pSlider4.x-80,pSlider4.y+60);
 
 }
 
 
 function run_simulation()
 {
-    preference = pSlider1.value();
-    time_b     = pSlider2.value();
-    use_pref   = pSlider3.value();
-    init_con   = pSlider4.value();
+    availability = pSlider0.value();
+    preference   = pSlider1.value();
+    time_b       = pSlider2.value();
+    use_pref     = pSlider3.value();
+    init_con     = pSlider4.value();
     reset_simulation();
 }
 
@@ -98,7 +104,7 @@ function update_simulation()
             }
             //console.log(time, r, time_b, preference)
 
-            if( r > preference )
+            if( r > ((preference+availability)/2) )
             {
                 pA += 1;
             }
@@ -161,7 +167,7 @@ function update_simulation_two_step()
 	   		 // Buy something
 			if (ifbreak == 1)
 			{
-           	 	if( r > preference )
+           	 	if( r > ((preference+availability)/2) )
             	{
                 	pA += 1;
             	}
@@ -298,7 +304,9 @@ function draw_tent2(x,y)
 }
 function draw()
 {
-    translate(0,-70)
+    yshift = 40;
+
+    translate(0,-1*yshift)
     //background(125);
     background(240);
     noStroke();
@@ -320,11 +328,15 @@ function draw()
     text("Initial\nnumber of\nimported", pSlider4.x+125-dx, pSlider4.y-12);
     */
     push();
-    translate(0,70);
-    text("Buy\n",      pSlider1.x-72-dx , pSlider1.y-2);
-    text("Buy\n",      pSlider1.x+125-dx, pSlider1.y-2);
-    text("Small\ngap", pSlider2.x-72-dx , pSlider2.y-2);
-    text("Big\ngap ",  pSlider2.x+125-dx, pSlider2.y-2);
+    translate(0,yshift);
+    //text("High ", pSlider0.x-82 , pSlider0.y-2);
+    //text("High ", pSlider0.x+115,  pSlider0.y-2);
+    text("availaiblity", pSlider0.x-82 ,    pSlider0.y+23);
+    text("availaiblity", pSlider0.x+115,    pSlider0.y+23);    
+    text("Buy\n",      pSlider1.x-72-dx ,   pSlider1.y-2);
+    text("Buy\n",      pSlider1.x+125-dx,   pSlider1.y-2);
+    text("Small\ngap", pSlider2.x-72-dx ,   pSlider2.y-2);
+    text("Big\ngap ",  pSlider2.x+125-dx,   pSlider2.y-2);
     text("Break\n",      pSlider3.x-72-dx , pSlider3.y-2);
     text("Break\n",      pSlider3.x+125-dx, pSlider3.y-2);
     text("Initial\nnumber\nof ",  pSlider4.x-72-dx , pSlider4.y-12);
@@ -333,17 +345,19 @@ function draw()
 
     push();
     noStroke();
-    translate(0,70);
+    translate(0,yshift);
     textFont(RobotoBold,23);
     //c_stroke = color(0,204,255);
     c_stroke = color(0,189,237);
     fill(c_stroke);
+    text("Local",     pSlider0.x-82 , pSlider0.y-2);
     text(" \nlocal",  pSlider1.x-72-dx , pSlider1.y-6);
     text(" \nlocal",  pSlider3.x-72-dx , pSlider3.y-6);
     text(" \n \n    local",  pSlider4.x-72-dx , pSlider4.y-20);
     //c_stroke = color(255,204,0);
     c_stroke = color(237,189,0);
     fill(c_stroke)
+    text("Imported",       pSlider0.x+115,    pSlider0.y-2);
     text(" \nimported",    pSlider1.x+125-dx, pSlider1.y-6);
     text(" \nimported",    pSlider3.x+125-dx, pSlider3.y-6);
     text(" \n \nimported", pSlider4.x+125-dx, pSlider4.y-20);

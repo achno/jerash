@@ -164,7 +164,7 @@ function draw()
 
 	fill(50);
     textFont(RobotoFont,24);
-    text("Change the preference between pots", 40, 45);
+    text("Change the preference and gap", 60, 45);
 
     textFont(RobotoFont,22);
 	text("Small gap",    pSlider2.x-110, pSlider2.y+10);

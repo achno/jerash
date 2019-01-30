@@ -175,7 +175,7 @@ function draw()
     //draw_simulation(tent_x+0.09*tent.width, tent_y+0.27*tent.height)//tent_y+tent.height);
     draw_simulation(tent_x+0.05*tent.width, tent_y+0.06*tent.height)
     textFont(RobotoFont,25);
-    text("Change the preference between pots", 40, 45);
+    text("Change the availaiblity between pots", 40, 45);
 
 
 }
