@@ -107,16 +107,16 @@ cbar_labels = ['>99.8%','>99.6%','>99.2%','>98%','>95%','>87%','>68%','>20%','<2
 for (var i=0; i<thresholds.length; i++)
 {
     svg.append('rect')
-       .attrs({ x:width+27+marginx, y:20+marginy+i*blockheight, width:20, height:blockheight,
+       .attrs({ x:width+17+marginx, y:20+marginy+i*blockheight, width:20, height:blockheight,
                 fill:colour(thresholds[thresholds.length-1-i]) })
     .attr("stroke-width",0);
 
     svg.append('text')
-        .attr("x", marginx+55+width)
-        .attr("y", marginy+40+i*blockheight)
+        .attr("x", marginx+41+width)
+        .attr("y", marginy+38+i*blockheight)
         .style("font-family", "sans-serif")
         .style("font-size", "18px")
-        .style("font-weight", "bold")
+        //.style("font-weight", "bold")
         .text(cbar_labels[i])
 }
 
@@ -172,7 +172,7 @@ svg.append('text')
     .attr("y", 200+marginy)
     .style("font-family", "sans-serif")
     .style("font-size", "25px")
-    .style("font-weight", "bold")
+    //.style("font-weight", "bold")
     .attr("transform","translate(-"+ text_x +","+ text_y +") rotate(-90)")
     .text('Gap')
 
@@ -190,7 +190,7 @@ svg.append('text')
     .attr("y", contourplotsize+30+marginy)
     .style("font-family", "sans-serif")
     .style("font-size", "25px")
-    .style("font-weight", "bold")
+    //.style("font-weight", "bold")
     .text('Preference for local')
 
 
